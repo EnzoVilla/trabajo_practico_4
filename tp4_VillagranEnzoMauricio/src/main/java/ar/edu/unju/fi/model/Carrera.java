@@ -1,23 +1,26 @@
 package ar.edu.unju.fi.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class Carrera {
-	private String codigo;
+	private int codigo;
 	private String nombre;
 	private int cantAnios;
 	private boolean estado;
 	public Carrera() {
 		// TODO Auto-generated constructor stub
 	}
-	public Carrera(String codigo, String nombre, int cantAnios, boolean estado) {
+	public Carrera(int codigo, String nombre, int cantAnios, boolean estado) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.cantAnios = cantAnios;
 		this.estado = estado;
 	}
-	public String getCodigo() {
+	public int getCodigo() {
 		return codigo;
 	}
-	public void setCodigo(String codigo) {
+	public void setCodigo(int codigo) {
 		this.codigo = codigo;
 	}
 	public String getNombre() {
