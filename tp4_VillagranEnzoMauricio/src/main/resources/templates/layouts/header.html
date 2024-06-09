@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>TP4 PVISUAL</title>
+	<link rel="stylesheet" data-th-href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Semi+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+	<link rel="stylesheet" data-th-href="@{/css/style.css}" >
+</head>
+<body>
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:fragment="header" class="d-flex justify-content-center align-items-center p-3">
+        <img class="m-3" src="images/logo-fi-unju.png" alt="Logo" width="auto" height="100">
+        <h1 class="m-3">Más allá de los límites, con código</h1>
+        <img class="m-3" src="images/logounju.png" alt="" width="auto" height="100">
+    </header>
+</body>
+</html>

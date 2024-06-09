@@ -10,11 +10,8 @@
 </head>
 <body style="background-color: #8A98DF;">
 	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
-	<header class="d-flex justify-content-center align-items-center p-3">
-        <img class="m-3" src="images/logo-fi-unju.png" alt="Logo" width="auto" height="100">
-        <h1 class="m-3">Más allá de los límites, con código</h1>
-        <img class="m-3" src="images/logounju.png" alt="" width="auto" height="100">
-    </header>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
     <nav class="navbar" style="background-color: #e3f2fd;">
         <div class="container-fluid justify-content-center">
             <ul class="nav ">
@@ -117,16 +114,7 @@
             </div>
         </div>
     </div>
-    <footer  class="text-white container fs-4 pt-3 ps-5" style="background-color:  #20232E;">
-    	<h2>Redes sociales de la facultad</h2>
-			<div class="fs-5">
-				<a href="https://www.facebook.com/fiunju/?locale=es_LA" class="text-white mt-2 text-decoration-none">Facebook</a><br>
-				<a href="https://www.instagram.com/fiunju/?hl=es" class="text-white mt-2 text-decoration-none">Instagram</a><br>
-				<a href="https://www.linkedin.com/school/facultad-de-ingenieria-unju/?originalSubdomain=ar" class="text-white mt-2 text-decoration-none">Linkedin</a><br>
-			</div>
-			<div class="d-flex justify-content-center">
-				<p class="fs-6">&copy; 2024 Enzo Villagran P_VISUAL. Todos los derechos reservados.</p>
-			</div>
+    <footer th:replace="~{layouts/footer :: footer}">
     </footer>
 </body>
 </html>
