@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/header :: head}">
+</head>
+<body style="background-color: #8A98DF;">
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>
+	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div class="d-flex justify-content-center">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Codigo</th>
+						<th>Nombre</th>
+						<th>Curso</th>
+						<th>Cantidad de horas</th>
+						<th>Modalidad</th>
+						<th>Docente</th>
+						<th>Carrera</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody data-th-each="mate : ${materias}">
+					<tr>
+						<td data-th-text="${mate.codigo}"></td>
+						<td data-th-text="${mate.nombre}"> </td>
+						<td data-th-text="${mate.curso}"></td>
+						<td data-th-text="${mate.cantHoras}"></td>
+						<td data-th-text="${mate.modalidad}"></td>
+						<td data-th-text="${mate.docente}"></td>
+						<td data-th-text="${mate.carrera}"></td>
+						<td>
+							<a class="btn btn-primary" data-th-href="@{/materia/modificar/}+${mate.codigo}">Modificar</a>
+							<a class="btn btn-primary" data-th-href="@{/materia/eliminar/}+${mate.codigo}">Eliminar</a>
+						</td>
+					</tr>		
+				</tbody>
+			</table>
+		</div>
+		<div class="d-flex justify-content-end me-5">
+			<a class="btn btn-dark" data-th-href="@{/materia/nueva}">Nueva Materia</a>
+		</div>
+	</div>
+	<footer th:replace="~{/layouts/footer :: footer}">
+    </footer>
+</body>
+</html>

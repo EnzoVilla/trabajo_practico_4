@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/header :: head}">
+</head>
+<body style="background-color: #8A98DF;">
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>>
+	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div class="d-flex justify-content-center">
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Legajo</th>
+						<th>Nombre</th>
+						<th>Apellido</th>
+						<th>Email</th>
+						<th>Telefono</th>
+						<th>Opciones</th>
+					</tr>
+				</thead>
+				<tbody data-th-each ="doce : ${docentes}">
+					<tr>
+						<td data-th-text="${doce.legajo}"></td>
+						<td data-th-text="${doce.nombre}"> </td>
+						<td data-th-text="${doce.apellido}"></td>
+						<td data-th-text="${doce.email}"></td>
+						<td data-th-text="${doce.telefono}"></td>
+						<td>
+							<a class="btn btn-primary" data-th-href="@{/docente/modificar/}+${doce.legajo}">Modificar</a>
+							<a class="btn btn-primary" data-th-href="@{/docente/eliminar/}+${doce.legajo}">Eliminar</a>
+						</td>
+					</tr>		
+				</tbody>
+			</table>
+		</div>
+		<div class="d-flex justify-content-end me-5">
+			<a class="btn btn-dark" data-th-href="@{/docente/nueva}">Nuevo Docente</a>
+		</div>	
+	</div>
+	<footer th:replace="~{/layouts/footer :: footer}">
+    </footer>
+</body>
+</html>

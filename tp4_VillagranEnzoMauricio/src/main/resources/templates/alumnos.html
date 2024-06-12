@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/header :: head}">
+</head>
+<body style="background-color: #8A98DF;">
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>>
+	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div class="d-flex justify-content-center">
+			<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>DNI</th>
+					<th>Nombre</th>
+					<th>Apellido</th>
+					<th>Email</th>
+					<th>Telefono</th>
+					<th>Fecha de nacimiento</th>
+					<th>Domicilio</th>
+					<th>LU</th>
+					<th>Opciones</th>
+				</tr>
+			</thead>
+			<tbody data-th-each ="alu : ${alumnos}">
+				<tr>
+					<td data-th-text="${alu.dni}"></td>
+					<td data-th-text="${alu.nombre}"> </td>
+					<td data-th-text="${alu.apellido}"></td>
+					<td data-th-text="${alu.email}"></td>
+					<td data-th-text="${alu.telefono}"></td>
+					<td data-th-text="${alu.fechaNacimiento}"></td>
+					<td data-th-text="${alu.domicilio}"></td>
+					<td data-th-text="${alu.lu}"></td>
+					
+					<td>
+						<a class="btn btn-primary" data-th-href="@{/alumno/modificar/}+${alu.lu}">Modificar</a>
+						<a class="btn btn-primary" data-th-href="@{/alumno/eliminar/}+${alu.lu}">Eliminar</a>
+					</td>
+				</tr>		
+			</tbody>
+		</table>
+		</div>
+		<div class="d-flex justify-content-end me-5">
+			<a class="btn btn-dark" data-th-href="@{/alumno/nueva}">Nuevo Alumno</a>
+		</div>	
+	</div>
+	<footer th:replace="~{/layouts/footer :: footer}">
+    </footer>
+</body>
+</html>

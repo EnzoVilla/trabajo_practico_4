@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/header :: head}">
+</head>
+<body style="background-color: #8A98DF;">
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>>
+	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div class="mb-3 d-flex justify-content-center">
+			<h2 data-th-text="${edicion}?'Modificar Alumno':'Nuevo Alumno'"></h2>
+		</div>
+		<div>
+			<form data-th-action="${edicion}?@{/alumno/modificar}:@{/alumno/guardar}" th:object="${alumno}" method="post">
+				<div class="d-flex justify-content-center mb-3">
+					<label for="lu">LU</label>
+					<input id="lu" type="number" name="lu" th:field="*{lu}" th:disabled="${edicion}?true:false">
+					<input id="lu" type="hidden" name="lu" th:field="*{lu}" th:if="${edicion}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="dni">DNI</label>
+					<input id="dni" type="text" name="dni" th:field="*{dni}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="nombre">Nombre</label>
+					<input id="nombre" type="text" name="nombre" th:field="*{nombre}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="apellido">Apellido</label>
+					<input id="apellido" type="text" name="apellido" th:field=*{apellido}>
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="email">Email</label>
+					<input id="email" type="email" name="email" th:field="*{email}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="telefono">Telefono</label>
+					<input id="telefono" type="number" name="telefono" th:field="*{telefono}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="fecNac">Fecha de nacimiento</label>
+					<input id="fecNac" type="date" name="fecNac" th:field="*{fechaNacimiento}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="domicilio">Domicilio</label>
+					<input id="domicilio" type="text" name="domicilio" th:field="*{domicilio}">
+				</div>
+				<div class="d-flex justify-content-center mb-3"> 
+					<p><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"> </p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="~{layouts/footer :: footer}">
+    </footer>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/header :: head}">
+</head>
+<body style="background-color: #8A98DF;">
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>
+	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div class="mb-3 d-flex justify-content-center">
+			<h2 data-th-text="${edicion}?'Modificar Carrera':'Nueva Carrera'"></h2>
+		</div>
+		<div class="row">
+			<form data-th-action="${edicion}?@{/carrera/modificar}:@{/carrera/guardar}" th:object="${carrera}" method="post">
+				<div class="d-flex justify-content-center mb-3">
+					<label for="codigoCarrera">Codigo</label>
+					<input id="codigoCarrera" type="number" name="codigoCarrera" th:field="*{codigo}" th:disabled="${edicion}?true:false">
+					<input id="codigoCarrera" type="hidden" name="codigoCarrera" th:field="*{codigo}" th:if="${edicion}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="nombreCarrera">Nombre</label>
+					<input id="nombreCarrera" type="text" name="nombreCarrera" th:field="*{nombre}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="aniosCarrera">Duracion de la carrera</label>
+					<input id="aniosCarrera" type="number" name="aniosCarrera" th:field="*{cantAnios}">
+				</div>
+				<div class="d-flex justify-content-center mb-3" th:if="${edicion}">
+					<label for="estado">Estado</label>
+					<div>
+						<label for="estado">Activa</label>
+						<input id="estado" type="radio" name="estado" value="true" th:field="*{estado}">
+						<label for="estado">Inactiva</label>
+						<input id="estado" type="radio" name="estado" value="false" th:field="*{estado}">
+					</div>
+				</div>
+				<div class="d-flex justify-content-center mb-3"> 
+					<p><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"> </p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="~{layouts/footer :: footer}">
+    </footer>
+</body>
+</html>

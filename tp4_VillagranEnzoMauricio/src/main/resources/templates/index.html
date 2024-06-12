@@ -12,27 +12,7 @@
 	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	<header th:replace="~{layouts/header :: header}">
 	</header>
-    <nav class="navbar" style="background-color: #e3f2fd;">
-        <div class="container-fluid justify-content-center">
-            <ul class="nav ">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Inicio</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Acerca de</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Carreras</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Noticias</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Contacto</a>
-                </li>
-            </ul>
-        </div>
-    </nav>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>
     <div class="container divPrincipal mt-3 p-3" style="background-color:  #e3f2fd;">
         <div class="row">
             <main class="col-9">
@@ -42,6 +22,7 @@
                     Su propósito fue apuntalar las actividades de explotación e industrialización de los recursos naturales de Jujuy. Las tres últimas carreras mencionadas pasan a constituir la actual Facultad de Ingeniería que, con el transcurso de los años, sumó a ellas un número importante de otras carreras.
                     Las políticas de la Universidad Nacional de Jujuy, y especialmente de la Facultad de Ingeniería, tienden a ampliar el área de influencia y a fortalecer su acción institucional, en respuesta a la demanda social creciente de formación de recursos humanos que contribuyan al desarrollo científico, tecnológico y cultural.
                     De esta forma, la Facultad se constituyó en vector de desarrollo de la provincia, por cuanto:
+                </p>
                     <ul>
                         <li>Posibilita la prosecución de estudios superiores a los jóvenes egresados del nivel medio, facilitando a un número creciente de ellos la obtención de un título universitario, sin los inconvenientes del desarraigo que tradicionalmente debían afrontar al trasladarse a centros universitarios radicados en otras provincias.</li>
                         <li>Por ende, aporta a la economía provincial al evitar la salida de recursos económicos asociados con la radicación de estudiantes en otras provincias.</li>
@@ -50,19 +31,20 @@
                         <li>Incorpora a la sociedad profesionales aptos para generar emprendimientos de distinta índole.</li>
                         <li>Mantiene fluidas relaciones institucionales con el sector productivo, las ONG, el ámbito educativo y la administración pública provincial mediante prestaciones de servicios, el desarrollo de actividades de investigación científica y tecnológica, y la formación y capacitación de recursos humanos. A la vez, dentro de este marco, promueve sistemas de pasantías para sus docentes y alumnos.</li>
                     </ul>
+                  <p>  
                     En la actualidad, las particularidades geopolíticas del área de influencia de la Facultad le otorgan una importante proyección internacional; 
                     proyección nacida tanto por el impacto regional producido por la globalización y en particular por los acuerdos suscriptos por nuestro país en el marco del Mercosur, como por la habilitación de nuevos pasos fronterizos en la provincia los cuales la integran regionalmente mediante el corredor bioceánico. 
                     Esta realidad permite que Jujuy pase de ser una provincia muy alejada de los puertos argentinos a otra que está sobre la línea de unión entre los puertos comerciales del norte de Chile con los de Brasil. Por ende, de disponer como única salida comercial el puerto de Buenos Aires a 1700 km, 
                     ahora está a tan sólo 700 km del de Antofagasta (Chile). Todo ello constituye a la vez una oportunidad y un desafío para la economía regional, y en consecuencia para la Facultad.
-                </p>
+                  </p>
             </main>
             <aside class="col-3 container-fluid">   
-                <h1>Enlaces utiles</h1>
+                <h1>Enlaces a tp4 parte 2</h1>
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><a href="#" class="text-decoration-none">Biblioteca</a></li>
-                    <li class="list-group-item"><a href="#" class="text-decoration-none">Calendario academico</a></li>
-                    <li class="list-group-item"><a href="#" class="text-decoration-none">Turnos de examenes</a></li>
-                    <li class="list-group-item"><a href="#" class="text-decoration-none">Siu Guarani</a></li>
+                    <li class="list-group-item"><a data-th-href="@{/carrera/listado}" class="text-decoration-none">Listado de carreras</a></li>
+                    <li class="list-group-item"><a data-th-href="@{/materia/listado}" class="text-decoration-none">Listado de materias</a></li>
+                    <li class="list-group-item"><a data-th-href="@{/docente/listado}" class="text-decoration-none">Listado de docentes</a></li>
+                    <li class="list-group-item"><a data-th-href="@{/alumno/listado}" class="text-decoration-none">Listado de alumnos</a></li>
                     <li class="list-group-item"><a href="#" class="text-decoration-none">Mapa del edificio</a></li>
                   </ul>
             </aside>
