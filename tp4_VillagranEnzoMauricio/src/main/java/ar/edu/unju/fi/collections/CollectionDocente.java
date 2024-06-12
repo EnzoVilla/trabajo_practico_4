@@ -15,16 +15,17 @@ public class CollectionDocente {
 	private static List<Docente> docentes = new ArrayList<Docente>();
 	
 	public static List<Docente> getDocente() {
-		if(docentes.isEmpty()) {
-			docentes.add(new Docente("1","Ariel", "Vega", "ArielVega@gmail.com", 414314123));
-			docentes.add(new Docente("2", "Carolina", "Apaza", "CarolinaApaza@gmail.com", 123546564));
-		}
+		/*
+		 * if(docentes.isEmpty()) { docentes.add(new Docente(1,"Ariel", "Vega",
+		 * "ArielVega@gmail.com", 414314123)); docentes.add(new Docente(2, "Carolina",
+		 * "Apaza", "CarolinaApaza@gmail.com", 123546564)); }
+		 */
 		return docentes;
 	}
 	public static void agregarDocente(Docente docente) {
 		docentes.add(docente);
 	}
-	public static void eliminarDocente(String legajo) {
+	public static void eliminarDocente(int legajo) {
 		Iterator<Docente> iterator = docentes.iterator();
 		while(iterator.hasNext()) {
 			if(iterator.next().getLegajo()==legajo) {
@@ -45,7 +46,7 @@ public class CollectionDocente {
 			}
 		}
 	}
-	public static Docente buscarDocente(String legajo) {
+	public static Docente buscarDocente(int legajo) {
 		Predicate<Docente> filterCodigo = d -> d.getLegajo()==legajo;
 		Optional<Docente> docente = docentes.stream().filter(filterCodigo).findFirst();
 		if(docente.isPresent()) {

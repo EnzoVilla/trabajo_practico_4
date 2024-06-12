@@ -13,10 +13,10 @@ public class CollectionCarrera {
 	private static List<Carrera> carreras = new ArrayList<Carrera>();
 	
 	public static List<Carrera> getCarreras(){
-		if(carreras.isEmpty()) {
-			carreras.add(new Carrera(1, "APU", 3, true));
-			carreras.add(new Carrera(2, "Ingenieria en minas", 5, true));
-		}
+		/*
+		 * if(carreras.isEmpty()) { carreras.add(new Carrera(1, "APU", 3, true));
+		 * carreras.add(new Carrera(2, "Ingenieria en minas", 5, true)); }
+		 */
 		return carreras;
 	}
 	public static void agregarCarrera(Carrera carrera) {

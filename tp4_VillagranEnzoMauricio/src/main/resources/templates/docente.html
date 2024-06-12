@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:replace="~{layouts/header :: head}">
+</head>
+<body style="background-color: #8A98DF;">
+	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+	<header th:replace="~{layouts/header :: header}">
+	</header>
+	<nav th:replace="~{layouts/header :: navbar}"></nav>>
+	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div class="mb-3 d-flex justify-content-center">
+			<h2 data-th-text="${edicion}?'Modificar Docente':'Nuevo Docente'"></h2>
+		</div>
+		<div class="row">
+			<form data-th-action="${edicion}?@{/docente/modificar}:@{/docente/guardar}" th:object="${docente}" method="post">
+				<div class="d-flex justify-content-center mb-3">
+					<label for="legajo">Legajo</label>
+					<input id="legajo" type="number" name="legajo" th:field="*{legajo}" th:disabled="${edicion}?true:false">
+					<input id="legajo" type="hidden" name="legajo" th:field="*{legajo}" th:if="${edicion}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="nombreDocente">Nombre</label>
+					<input id="nombreDocente" type="text" name="nombreDocente" th:field="*{nombre}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="apellidoDocente">Apellido</label>
+					<input id="apellidoDocente" type="text" name="apellidoDocente" th:field="*{apellido}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="email">Email</label>
+					<input id="email" type="email" name="email" th:field="*{email}">
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="telefono">Telefono</label>
+					<input id="telefono" type="number" name="telefono" th:field="*{telefono}">
+				</div>
+				<div class="d-flex justify-content-center mb-3"> 
+					<p><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"> </p>
+				</div>
+			</form>
+		</div>
+	</div>
+	<footer th:replace="~{layouts/footer :: footer}">
+    </footer>
+</body>
+</html>

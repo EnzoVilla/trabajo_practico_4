@@ -1,6 +1,6 @@
 package ar.edu.unju.fi.collections;
 
-import java.time.LocalDate;
+//import java.time.LocalDate; //me salen mensajes de advertencia ya que no se usa, por eso lo comento
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,16 +15,19 @@ public class CollectionAlumno {
 	private static List<Alumno> alumnos = new ArrayList<Alumno>();
 	
 	public static List<Alumno> getAlumnos() {
-		if(alumnos.isEmpty()) {
-			alumnos.add(new Alumno("43698621", "Raul", "Flores", "RaulFlores@gmail.com", 388584123, LocalDate.of(2001, 8, 15),"calle congreso numero 753", "4123"));
-			alumnos.add(new Alumno("44653633", "Carla", "Gutierrez", "CarlaGutierrez@gmail.com", 388574884, LocalDate.of(2002, 5, 19),"calle cabildo numero 521", "4428"));
-		}
+		/*
+		 * if(alumnos.isEmpty()) { alumnos.add(new Alumno("43698621", "Raul", "Flores",
+		 * "RaulFlores@gmail.com", 388584123, LocalDate.of(2001, 8,
+		 * 15),"calle congreso numero 753", 4123)); alumnos.add(new Alumno("44653633",
+		 * "Carla", "Gutierrez", "CarlaGutierrez@gmail.com", 388574884,
+		 * LocalDate.of(2002, 5, 19),"calle cabildo numero 521", 4428)); }
+		 */
 		return alumnos;
 	}
 	public static void agregarAlumno(Alumno alumno) {
 		alumnos.add(alumno);
 	}
-	public static void eliminarAlumno(String lu) {
+	public static void eliminarAlumno(int lu) {
 		Iterator<Alumno> iterator = alumnos.iterator();
 		while(iterator.hasNext()) {
 			if(iterator.next().getLu()==lu) {
@@ -47,7 +50,7 @@ public class CollectionAlumno {
 			}
 		}
 	}
-	public static Alumno buscarAlumno(String lu) {
+	public static Alumno buscarAlumno(int lu) {
 		Predicate<Alumno> filterCodigo = a -> a.getLu()==lu;
 		Optional<Alumno> alumno = alumnos.stream().filter(filterCodigo).findFirst();
 		if(alumno.isPresent()) {

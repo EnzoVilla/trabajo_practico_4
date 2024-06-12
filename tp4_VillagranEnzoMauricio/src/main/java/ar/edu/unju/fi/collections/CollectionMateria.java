@@ -15,15 +15,16 @@ public class CollectionMateria {
 	private static List<Materia> materias = new ArrayList<Materia>();
 	
 	public static List<Materia> getMaterias() {
-		if(materias.isEmpty()) {
-			materias.add(new Materia("1", "Base de datos", "1", "6", "Virtual", "Ariel Vega", "APU"));
-		}
+		/*
+		 * if(materias.isEmpty()) { materias.add(new Materia("1", "Base de datos", "1",
+		 * "6", "Virtual", "Ariel Vega", "APU")); }
+		 */
 		return materias;
 	}
 	public static void agregarMateria(Materia materia) {
 		materias.add(materia);
 	}
-	public static void eliminarMateria(String codigo) {
+	public static void eliminarMateria(int codigo) {
 		Iterator<Materia> iterator = materias.iterator();
 		while(iterator.hasNext()) {
 			if(iterator.next().getCodigo()==codigo) {
@@ -45,7 +46,7 @@ public class CollectionMateria {
 			}
 		}
 	}
-	public static Materia buscarMateria(String codigo) {
+	public static Materia buscarMateria(int codigo) {
 		Predicate<Materia> filterCodigo= m -> m.getCodigo()==codigo;
 		Optional<Materia> materia = materias.stream().filter(filterCodigo).findFirst();
 		if(materia.isPresent()) {

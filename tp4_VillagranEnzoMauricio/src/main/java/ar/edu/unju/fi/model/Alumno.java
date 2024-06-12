@@ -12,12 +12,12 @@ public class Alumno {
 	private long telefono;
 	private LocalDate fechaNacimiento;
 	private String domicilio;
-	private String lu;
+	private int lu;
 	public Alumno() {
 		// TODO Auto-generated constructor stub
 	}
 	public Alumno(String dni, String nombre, String apellido, String email, long telefono, LocalDate fechaNacimiento,
-			String domicilio, String lu) {
+			String domicilio, int lu) {
 		this.dni = dni;
 		this.nombre = nombre;
 		this.apellido = apellido;
@@ -69,10 +69,10 @@ public class Alumno {
 	public void setDomicilio(String domicilio) {
 		this.domicilio = domicilio;
 	}
-	public String getLu() {
+	public int getLu() {
 		return lu;
 	}
-	public void setLu(String lu) {
+	public void setLu(int lu) {
 		this.lu = lu;
 	}
 	@Override
