@@ -13,7 +13,6 @@ import ar.edu.unju.fi.model.Docente;
 @Component
 public class CollectionDocente {
 	private static List<Docente> docentes = new ArrayList<Docente>();
-	
 	public static List<Docente> getDocente() {
 		/*
 		 * if(docentes.isEmpty()) { docentes.add(new Docente(1,"Ariel", "Vega",
@@ -22,8 +21,8 @@ public class CollectionDocente {
 		 */
 		return docentes;
 	}
-	public static void agregarDocente(Docente docente) {
-		docentes.add(docente);
+	public static boolean agregarDocente(Docente docente) {
+		return docentes.add(docente)?true:false;
 	}
 	public static void eliminarDocente(int legajo) {
 		Iterator<Docente> iterator = docentes.iterator();
@@ -33,18 +32,27 @@ public class CollectionDocente {
 			}
 		}
 	}
-	public static void modificarDocente(Docente docente){
-		for(Docente doc : docentes) {
-			if(doc.getLegajo()==docente.getLegajo()) {
-				doc.setNombre(docente.getNombre());
-				doc.setApellido(docente.getApellido());
-				doc.setEmail(docente.getEmail());
-				doc.setTelefono(docente.getTelefono());
+	public static void modificarDocente(Docente docente)throws Exception{
+		boolean encontrado=false;
+		try {
+			for(Docente doc : docentes) {
+				if(doc.getLegajo()==docente.getLegajo()) {
+					doc.setNombre(docente.getNombre());
+					doc.setApellido(docente.getApellido());
+					doc.setEmail(docente.getEmail());
+					doc.setTelefono(docente.getTelefono());
+					encontrado=true;
+				}
 			}
-			else {
-				System.out.println("No se encontro el legajo del docente");
+			if(!encontrado) {
+				throw new Exception("El docente con legajo "+ docente.getLegajo()+" no fue encontrado");
 			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
 		}
+		
+		
 	}
 	public static Docente buscarDocente(int legajo) {
 		Predicate<Docente> filterCodigo = d -> d.getLegajo()==legajo;
@@ -55,5 +63,8 @@ public class CollectionDocente {
 		else {
 			return null;
 		}
+	}
+	public static int tamaño() {
+		return docentes.size();
 	}
 }

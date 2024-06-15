@@ -24,8 +24,8 @@ public class CollectionAlumno {
 		 */
 		return alumnos;
 	}
-	public static void agregarAlumno(Alumno alumno) {
-		alumnos.add(alumno);
+	public static boolean agregarAlumno(Alumno alumno) {
+		return alumnos.add(alumno)?true:false;
 	}
 	public static void eliminarAlumno(int lu) {
 		Iterator<Alumno> iterator = alumnos.iterator();
@@ -35,19 +35,27 @@ public class CollectionAlumno {
 			}
 		}
 	}
-	public static void modificarAlumno(Alumno alumno) {
-		for(Alumno alum : alumnos) {
-			if(alum.getLu()== alumno.getLu()) {
-				alum.setNombre(alumno.getNombre());
-				alum.setApellido(alumno.getApellido());
-				alum.setDni(alumno.getDni());
-				alum.setEmail(alumno.getEmail());
-				alum.setFechaNacimiento(alumno.getFechaNacimiento());
-				alum.setDomicilio(alumno.getDomicilio());
-				alum.setTelefono(alumno.getTelefono());
-			}else {
-				System.out.println("No se encontro la LU del alumno");
+	public static void modificarAlumno(Alumno alumno) throws Exception {
+		boolean encontrado = false;
+		try {
+			for(Alumno alum : alumnos) {
+				if(alum.getLu()== alumno.getLu()) {
+					alum.setNombre(alumno.getNombre());
+					alum.setApellido(alumno.getApellido());
+					alum.setDni(alumno.getDni());
+					alum.setEmail(alumno.getEmail());
+					alum.setFechaNacimiento(alumno.getFechaNacimiento());
+					alum.setDomicilio(alumno.getDomicilio());
+					alum.setTelefono(alumno.getTelefono());
+					encontrado=true;
+				}
 			}
+			if(!encontrado) {
+				throw new Exception("El alumno con libreta "+ alumno.getLu()+" no fue encontrado");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
 		}
 	}
 	public static Alumno buscarAlumno(int lu) {

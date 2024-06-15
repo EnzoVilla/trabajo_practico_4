@@ -14,25 +14,25 @@
 		<div class="row">
 			<form data-th-action="${edicion}?@{/docente/modificar}:@{/docente/guardar}" th:object="${docente}" method="post">
 				<div class="d-flex justify-content-center mb-3">
-					<label for="legajo">Legajo</label>
-					<input id="legajo" type="number" name="legajo" th:field="*{legajo}" th:disabled="${edicion}?true:false">
+					<label for="legajo" class="me-2">Legajo</label>
+					<input id="legajo" type="number" name="legajo" th:field="*{legajo}" th:disabled="${edicion}?true:false" required>
 					<input id="legajo" type="hidden" name="legajo" th:field="*{legajo}" th:if="${edicion}">
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="nombreDocente">Nombre</label>
-					<input id="nombreDocente" type="text" name="nombreDocente" th:field="*{nombre}">
+					<label for="nombreDocente" class="me-2">Nombre</label>
+					<input id="nombreDocente" type="text" name="nombreDocente" th:field="*{nombre}" required>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="apellidoDocente">Apellido</label>
-					<input id="apellidoDocente" type="text" name="apellidoDocente" th:field="*{apellido}">
+					<label for="apellidoDocente" class="me-2">Apellido</label>
+					<input id="apellidoDocente" type="text" name="apellidoDocente" th:field="*{apellido}" required>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="email">Email</label>
-					<input id="email" type="email" name="email" th:field="*{email}">
+					<label for="email" class="me-2">Email</label>
+					<input id="email" type="email" name="email" th:field="*{email}" required>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="telefono">Telefono</label>
-					<input id="telefono" type="number" name="telefono" th:field="*{telefono}">
+					<label for="telefono" class="me-2">Telefono</label>
+					<input id="telefono" type="number" name="telefono" th:field="*{telefono}" required>
 				</div>
 				<div class="d-flex justify-content-center mb-3"> 
 					<p><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"> </p>

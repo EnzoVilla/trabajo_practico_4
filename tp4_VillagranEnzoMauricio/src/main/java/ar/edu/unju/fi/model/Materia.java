@@ -9,13 +9,13 @@ public class Materia {
 	private String curso;
 	private String cantHoras;
 	private String modalidad;
-	private String docente;
-	private String carrera;
+	private Docente docente;
+	private Carrera carrera;
 	public Materia() {
 		// TODO Auto-generated constructor stub
 	}
-	public Materia(int codigo, String nombre, String curso, String cantHoras, String modalidad, String docente,
-			String carrera) {
+	public Materia(int codigo, String nombre, String curso, String cantHoras, String modalidad, Docente docente,
+			Carrera carrera) {
 		this.codigo = codigo;
 		this.nombre = nombre;
 		this.curso = curso;
@@ -54,16 +54,16 @@ public class Materia {
 	public void setModalidad(String modalidad) {
 		this.modalidad = modalidad;
 	}
-	public String getDocente() {
+	public Docente getDocente() {
 		return docente;
 	}
-	public void setDocente(String docente) {
+	public void setDocente(Docente docente) {
 		this.docente = docente;
 	}
-	public String getCarrera() {
+	public Carrera getCarrera() {
 		return carrera;
 	}
-	public void setCarrera(String carrera) {
+	public void setCarrera(Carrera carrera) {
 		this.carrera = carrera;
 	}
 	@Override

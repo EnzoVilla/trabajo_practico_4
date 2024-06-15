@@ -21,8 +21,8 @@ public class CollectionMateria {
 		 */
 		return materias;
 	}
-	public static void agregarMateria(Materia materia) {
-		materias.add(materia);
+	public static boolean agregarMateria(Materia materia) {
+		return materias.add(materia)?true:false;
 	}
 	public static void eliminarMateria(int codigo) {
 		Iterator<Materia> iterator = materias.iterator();
@@ -32,19 +32,29 @@ public class CollectionMateria {
 			}
 		}
 	}
-	public static void modificarMateria(Materia materia) {
-		for(Materia mat : materias) {
-			if(mat.getCodigo()== materia.getCodigo()) {
-				mat.setNombre(materia.getNombre());
-				mat.setCurso(materia.getCurso());
-				mat.setCarrera(materia.getCarrera());
-				mat.setCantHoras(materia.getCantHoras());
-				mat.setModalidad(materia.getModalidad());
-				mat.setDocente(materia.getDocente());
-			}else {
-				System.out.println("No se encuentra la materia");
+	public static void modificarMateria(Materia materia) throws Exception {
+		boolean encontrado=false;
+		try {
+			for(Materia mat : materias) {
+				if(mat.getCodigo()== materia.getCodigo()) {
+					mat.setNombre(materia.getNombre());
+					mat.setCurso(materia.getCurso());
+					mat.setCarrera(materia.getCarrera());
+					mat.setCantHoras(materia.getCantHoras());
+					mat.setModalidad(materia.getModalidad());
+					mat.setDocente(materia.getDocente());
+					encontrado = true;
+				}
 			}
+			if(!encontrado) {
+				throw new Exception("La materia con codigo"+ materia.getCodigo()+" no fue encontrada");
+			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e;
 		}
+		
+		
 	}
 	public static Materia buscarMateria(int codigo) {
 		Predicate<Materia> filterCodigo= m -> m.getCodigo()==codigo;

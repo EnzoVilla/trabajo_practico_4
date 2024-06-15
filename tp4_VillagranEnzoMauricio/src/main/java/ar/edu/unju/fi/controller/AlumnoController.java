@@ -21,6 +21,10 @@ public class AlumnoController {
 	
 	@GetMapping("/listado")
 	public String getAlumnosPage(Model model) {
+		boolean exito=false;
+		String mensaje="";
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
 		model.addAttribute("titulo", "Alumnos");
 		return("alumnos");
@@ -36,7 +40,15 @@ public class AlumnoController {
 	@PostMapping("/guardar")
 	public ModelAndView guardar(@ModelAttribute("alumno") Alumno alumno) {
 		ModelAndView modelAndView = new ModelAndView("alumnos");
-		CollectionAlumno.agregarAlumno(alumno);
+		String mensaje;
+		boolean exito = CollectionAlumno.agregarAlumno(alumno);
+		if(exito) {
+			mensaje="Se guardo al Alumno con exito";
+		}else {
+			mensaje="No se pudo guardar";
+		}
+		modelAndView.addObject("exito", exito);
+		modelAndView.addObject("mensaje", mensaje);
 		modelAndView.addObject("alumnos", CollectionAlumno.getAlumnos());
 		return modelAndView;
 	}
@@ -51,9 +63,22 @@ public class AlumnoController {
 		return("alumno");
 	}
 	@PostMapping("/modificar")
-	public String modificarAlumno(@ModelAttribute("alumno") Alumno alumno) {
-		CollectionAlumno.modificarAlumno(alumno);
-		return("redirect:/alumno/listado");
+	public String modificarAlumno(@ModelAttribute("alumno") Alumno alumno, Model model) {
+		boolean exito=false;
+		String mensaje="";
+		try {
+			CollectionAlumno.modificarAlumno(alumno);
+			mensaje="El alumno con libreta "+alumno.getLu()+" fue modificada con exito";
+			exito=true;
+		}catch(Exception e){
+			mensaje=e.getMessage();
+			e.printStackTrace();
+		}
+		model.addAttribute("mensaje", mensaje);
+		model.addAttribute("exito", exito);
+		model.addAttribute("alumnos", CollectionAlumno.getAlumnos());
+		model.addAttribute("titulo", "Alumnos");
+		return("alumnos");
 	}
 	@GetMapping("/eliminar/{lu}")
 	public String eliminarCarrera(@PathVariable(value="lu") int lu) {

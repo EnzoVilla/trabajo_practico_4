@@ -20,6 +20,10 @@ public class DocenteController {
 	
 	@GetMapping("/listado")
 	public String getDocentesPage(Model model) {
+		boolean exito=false;
+		String mensaje="";
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("docentes", CollectionDocente.getDocente());
 		model.addAttribute("titulo", "Docentes");
 		return("docentes");
@@ -35,7 +39,15 @@ public class DocenteController {
 	@PostMapping("/guardar")
 	public ModelAndView guardar(@ModelAttribute("docente") Docente docente) {
 		ModelAndView modelAndView = new ModelAndView("docentes");
-		CollectionDocente.agregarDocente(docente);
+		boolean exito = CollectionDocente.agregarDocente(docente);
+		String mensaje;
+		if(exito) {
+			mensaje="Se guardo docente con exito";
+		}else {
+			mensaje="No se pudo guardar";
+		}
+		modelAndView.addObject("exito", exito);
+		modelAndView.addObject("mensaje", mensaje);
 		modelAndView.addObject("docentes", CollectionDocente.getDocente());
 		return modelAndView;
 	}
@@ -50,9 +62,21 @@ public class DocenteController {
 		return("docente");
 	}
 	@PostMapping("/modificar")
-	public String modificarDocente(@ModelAttribute("docente") Docente docente) {
-		CollectionDocente.modificarDocente(docente);
-		return("redirect:/docente/listado");
+	public String modificarDocente(@ModelAttribute("docente") Docente docente, Model model) {
+		boolean exito=false;
+		String mensaje="";
+		try {
+			CollectionDocente.modificarDocente(docente);
+			mensaje="El docente con legajo "+docente.getLegajo()+" se modifico con exito";
+			exito=true;
+		}catch(Exception e) {
+			mensaje=e.getMessage();
+		}
+		model.addAttribute("exito", exito);
+		model.addAttribute("mensaje", mensaje);
+		model.addAttribute("docentes", CollectionDocente.getDocente());
+		model.addAttribute("titulo", "Docentes");
+		return("docentes");
 	}
 	@GetMapping("/eliminar/{legajo}")
 	public String eliminarDocente(@PathVariable(value="legajo") int legajo) {
