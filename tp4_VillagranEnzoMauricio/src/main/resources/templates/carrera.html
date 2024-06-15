@@ -14,20 +14,20 @@
 		<div class="row">
 			<form data-th-action="${edicion}?@{/carrera/modificar}:@{/carrera/guardar}" th:object="${carrera}" method="post">
 				<div class="d-flex justify-content-center mb-3">
-					<label for="codigoCarrera">Codigo</label>
-					<input id="codigoCarrera" type="number" name="codigoCarrera" th:field="*{codigo}" th:disabled="${edicion}?true:false">
+					<label for="codigoCarrera" class="me-2">Codigo</label>
+					<input id="codigoCarrera" type="number" name="codigoCarrera" th:field="*{codigo}" th:disabled="${edicion}?true:false" required>
 					<input id="codigoCarrera" type="hidden" name="codigoCarrera" th:field="*{codigo}" th:if="${edicion}">
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="nombreCarrera">Nombre</label>
-					<input id="nombreCarrera" type="text" name="nombreCarrera" th:field="*{nombre}">
+					<label for="nombreCarrera" class="me-2">Nombre</label>
+					<input id="nombreCarrera" type="text" name="nombreCarrera" th:field="*{nombre}" required>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="aniosCarrera">Duracion de la carrera</label>
-					<input id="aniosCarrera" type="number" name="aniosCarrera" th:field="*{cantAnios}">
+					<label for="aniosCarrera" class="me-2">Duracion de la carrera</label>
+					<input id="aniosCarrera" type="number" name="aniosCarrera" th:field="*{cantAnios}" required>
 				</div>
 				<div class="d-flex justify-content-center mb-3" th:if="${edicion}">
-					<label for="estado">Estado</label>
+					<label for="estado" class="me-2">Estado:</label>
 					<div>
 						<label for="estado">Activa</label>
 						<input id="estado" type="radio" name="estado" value="true" th:field="*{estado}">

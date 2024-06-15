@@ -8,6 +8,15 @@
 	</header>
 	<nav th:replace="~{layouts/header :: navbar}"></nav>>
 	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div th:if="${exito}"class="alert alert-success alert-dismissible fade show" role="alert">
+			<strong data-th-text="${mensaje}"></strong>
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div th:if="${!exito && mensaje!=''}"class="alert alert-warning alert-dismissible fade show" role="alert">
+			 <strong data-th-text="${mensaje}"></strong>
+			 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	
 		<div class="d-flex justify-content-center">
 			<table class="table table-striped">
 				<thead>
@@ -29,7 +38,9 @@
 						<td data-th-text="${doce.telefono}"></td>
 						<td>
 							<a class="btn btn-primary" data-th-href="@{/docente/modificar/}+${doce.legajo}">Modificar</a>
-							<a class="btn btn-primary" data-th-href="@{/docente/eliminar/}+${doce.legajo}">Eliminar</a>
+							<button type="button" th:data-legajoDocente="${doce.legajo}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+							  Eliminar
+							</button>
 						</td>
 					</tr>		
 				</tbody>
@@ -38,8 +49,41 @@
 		<div class="d-flex justify-content-end me-5">
 			<a class="btn btn-dark" data-th-href="@{/docente/nueva}">Nuevo Docente</a>
 		</div>	
-	</div>
+	</div>	
 	<footer th:replace="~{/layouts/footer :: footer}">
     </footer>
+    
+    
+    <!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirmar eliminacion</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        ¿Esta seguro que desea eliminar este Docente?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        <form th:action="@{/docente/eliminar/{legajoDocente}(legajoDocente=${selectedlegajoDocente})}" method="get">
+	        	<button type="submit" class="btn btn-primary">Eliminar</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var deleteModal = document.getElementById('deleteModal');
+			deleteModal.addEventListener('show.bs.modal', function (event) {
+				var button = event.relatedTarget;
+				var legajoDocente = button.getAttribute('data-legajoDocente');
+				var form = deleteModal.querySelector('form');
+				form.setAttribute('action', '/docente/eliminar/' + legajoDocente);
+			});
+		});
+	</script>
 </body>
 </html>

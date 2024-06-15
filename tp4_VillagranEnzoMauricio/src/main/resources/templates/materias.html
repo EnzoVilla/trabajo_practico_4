@@ -8,6 +8,14 @@
 	</header>
 	<nav th:replace="~{layouts/header :: navbar}"></nav>
 	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div th:if="${exito}"class="alert alert-success alert-dismissible fade show" role="alert">
+		  <strong data-th-text="${mensaje}"></strong>
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div th:if="${!exito && mensaje!=''}"class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <strong data-th-text="${mensaje}"></strong>
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
 		<div class="d-flex justify-content-center">
 			<table class="table table-striped">
 				<thead>
@@ -29,11 +37,14 @@
 						<td data-th-text="${mate.curso}"></td>
 						<td data-th-text="${mate.cantHoras}"></td>
 						<td data-th-text="${mate.modalidad}"></td>
-						<td data-th-text="${mate.docente}"></td>
-						<td data-th-text="${mate.carrera}"></td>
+						<td data-th-text="${mate.docente.nombre}+' '+${mate.docente.apellido}"></td>
+						<td data-th-text="${mate.carrera.nombre}"></td>
 						<td>
 							<a class="btn btn-primary" data-th-href="@{/materia/modificar/}+${mate.codigo}">Modificar</a>
-							<a class="btn btn-primary" data-th-href="@{/materia/eliminar/}+${mate.codigo}">Eliminar</a>
+							<!-- <a class="btn btn-primary" data-th-href="@{/materia/eliminar/}+${mate.codigo}">Eliminar</a> -->
+							<button type="button" th:data-codMateria="${mate.codigo}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+							  Eliminar
+							</button>
 						</td>
 					</tr>		
 				</tbody>
@@ -45,5 +56,36 @@
 	</div>
 	<footer th:replace="~{/layouts/footer :: footer}">
     </footer>
+    <!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirmar eliminacion</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        ¿Esta seguro que desea eliminar esta materia?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        <form th:action="@{/materia/eliminar/{codMateria}(codMateria=${selectedCodMateria})}" method="get">
+	        	<button type="submit" class="btn btn-primary">Eliminar</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var deleteModal = document.getElementById('deleteModal');
+			deleteModal.addEventListener('show.bs.modal', function (event) {
+				var button = event.relatedTarget;
+				var codMateria = button.getAttribute('data-codMateria');
+				var form = deleteModal.querySelector('form');
+				form.setAttribute('action', '/materia/eliminar/' + codMateria);
+			});
+		});
+	</script>
 </body>
 </html>

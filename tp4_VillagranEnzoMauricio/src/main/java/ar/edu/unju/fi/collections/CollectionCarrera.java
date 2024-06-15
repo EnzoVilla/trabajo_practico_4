@@ -19,8 +19,8 @@ public class CollectionCarrera {
 		 */
 		return carreras;
 	}
-	public static void agregarCarrera(Carrera carrera) {
-		carreras.add(carrera);
+	public static boolean agregarCarrera(Carrera carrera) {
+		return carreras.add(carrera)?true:false;
 	}
 	public static void eliminarCarrera(int codigoCarrera) {
 		Iterator<Carrera> iterator = carreras.iterator();
@@ -30,17 +30,25 @@ public class CollectionCarrera {
 			}
 		}
 	}
-	public static void modificarCarrera(Carrera carrera) {
-		for(Carrera carre : carreras) {
-			if(carre.getCodigo()==carrera.getCodigo()) {
-				carre.setNombre(carrera.getNombre());
-				carre.setCantAnios(carrera.getCantAnios());
-				carre.setEstado(carrera.isEstado());
+	public static void modificarCarrera(Carrera carrera) throws Exception{
+		boolean encontrado=false;
+		try {
+			for(Carrera carre : carreras) {
+				if(carre.getCodigo()==carrera.getCodigo()) {
+					carre.setNombre(carrera.getNombre());
+					carre.setCantAnios(carrera.getCantAnios());
+					carre.setEstado(carrera.isEstado());
+					encontrado=true;
+				}
 			}
-			else {
-				System.out.println("no se encuentra el codigo de la carrera");
+			if(!encontrado) {
+				throw new Exception("La carrera con codigo"+ carrera.getCodigo()+" no fue encontrada");
 			}
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+			throw e; //propaga al metodo que inicia esta ejecucion(el controlador) la excepcion
 		}
+		
 	}
 	public static Carrera buscarCarrera(int codigo) {
 		Predicate<Carrera> filterCodigo = c -> c.getCodigo()==codigo;
@@ -51,6 +59,8 @@ public class CollectionCarrera {
 			return null;
 		}
 	}
-	
+	public static int tamaño() {
+		return carreras.size();
+	}
 	
 }

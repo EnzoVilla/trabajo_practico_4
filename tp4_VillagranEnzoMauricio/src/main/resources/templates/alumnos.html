@@ -8,35 +8,44 @@
 	</header>
 	<nav th:replace="~{layouts/header :: navbar}"></nav>>
 	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
+		<div th:if="${exito}"class="alert alert-success alert-dismissible fade show" role="alert">
+		  <strong data-th-text="${mensaje}"></strong>
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+		<div th:if="${!exito && mensaje!=''}"class="alert alert-warning alert-dismissible fade show" role="alert">
+		  <strong data-th-text="${mensaje}"></strong>
+		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
 		<div class="d-flex justify-content-center">
 			<table class="table table-striped">
 			<thead>
 				<tr>
 					<th>DNI</th>
+					<th>LU</th>
 					<th>Nombre</th>
 					<th>Apellido</th>
 					<th>Email</th>
 					<th>Telefono</th>
 					<th>Fecha de nacimiento</th>
 					<th>Domicilio</th>
-					<th>LU</th>
 					<th>Opciones</th>
 				</tr>
 			</thead>
 			<tbody data-th-each ="alu : ${alumnos}">
 				<tr>
 					<td data-th-text="${alu.dni}"></td>
+					<td data-th-text="${alu.lu}"></td>
 					<td data-th-text="${alu.nombre}"> </td>
 					<td data-th-text="${alu.apellido}"></td>
 					<td data-th-text="${alu.email}"></td>
 					<td data-th-text="${alu.telefono}"></td>
 					<td data-th-text="${alu.fechaNacimiento}"></td>
 					<td data-th-text="${alu.domicilio}"></td>
-					<td data-th-text="${alu.lu}"></td>
-					
 					<td>
 						<a class="btn btn-primary" data-th-href="@{/alumno/modificar/}+${alu.lu}">Modificar</a>
-						<a class="btn btn-primary" data-th-href="@{/alumno/eliminar/}+${alu.lu}">Eliminar</a>
+						<button type="button" th:data-luAlumno="${alu.lu}" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#deleteModal">
+							  Eliminar
+						</button>
 					</td>
 				</tr>		
 			</tbody>
@@ -48,5 +57,36 @@
 	</div>
 	<footer th:replace="~{/layouts/footer :: footer}">
     </footer>
+    <!-- Modal -->
+	<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="deleteModalLabel">Confirmar eliminacion</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	        ¿Esta seguro que desea eliminar este Alumno?
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	        <form th:action="@{/alumno/eliminar/{luAlumno}(luAlumno=${selectedluAlumno})}" method="get">
+	        	<button type="submit" class="btn btn-primary">Eliminar</button>
+	        </form>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	<script>
+		document.addEventListener('DOMContentLoaded', function() {
+			var deleteModal = document.getElementById('deleteModal');
+			deleteModal.addEventListener('show.bs.modal', function (event) {
+				var button = event.relatedTarget;
+				var luAlumno = button.getAttribute('data-luAlumno');
+				var form = deleteModal.querySelector('form');
+				form.setAttribute('action', '/alumno/eliminar/' + luAlumno);
+			});
+		});
+	</script>
 </body>
 </html>
