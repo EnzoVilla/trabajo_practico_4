@@ -77,12 +77,18 @@ public class MateriaController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("materia", materiaEncontrada);
 		model.addAttribute("titulo", "Modificar materia");
+		model.addAttribute("carreras",CollectionCarrera.getCarreras());
+		model.addAttribute("docentes", CollectionDocente.getDocente());
 		return("materia");
 	}
 	@PostMapping("/modificar")
 	public String modificarMateria(@ModelAttribute("materia") Materia materia, Model model) {
 		boolean exito=false;
 		String mensaje="";
+		carrera = CollectionCarrera.buscarCarrera(materia.getCarrera().getCodigo());
+		docente = CollectionDocente.buscarDocente(materia.getDocente().getLegajo());
+		materia.setCarrera(carrera); 
+		materia.setDocente(docente);
 		try {
 			CollectionMateria.modificarMateria(materia);
 			mensaje="La materia con codigo "+materia.getCodigo()+" fue modificada con exito";
