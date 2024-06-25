@@ -9,7 +9,6 @@
 	<link rel="stylesheet" data-th-href="@{/css/style.css}" >
 </head>
 <body style="background-color: #8A98DF;">
-	<script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 	<header th:replace="~{layouts/header :: header}">
 	</header>
 	<nav th:replace="~{layouts/header :: navbar}"></nav>
@@ -45,7 +44,6 @@
                     <li class="list-group-item"><a data-th-href="@{/materia/listado}" class="text-decoration-none">Listado de materias</a></li>
                     <li class="list-group-item"><a data-th-href="@{/docente/listado}" class="text-decoration-none">Listado de docentes</a></li>
                     <li class="list-group-item"><a data-th-href="@{/alumno/listado}" class="text-decoration-none">Listado de alumnos</a></li>
-                    <li class="list-group-item"><a href="#" class="text-decoration-none">Mapa del edificio</a></li>
                   </ul>
             </aside>
         </div>
@@ -98,5 +96,6 @@
     </div>
     <footer th:replace="~{layouts/footer :: footer}">
     </footer>
+    <script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
 </body>
 </html>
