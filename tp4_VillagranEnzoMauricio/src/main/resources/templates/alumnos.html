@@ -39,7 +39,7 @@
 					<td data-th-text="${alu.apellido}"></td>
 					<td data-th-text="${alu.email}"></td>
 					<td data-th-text="${alu.telefono}"></td>
-					<td data-th-text="${alu.fechaNacimiento}"></td>
+					<td data-th-text="${#temporals.format(alu.fechaNacimiento, 'dd/MM/yyyy')}"></td>
 					<td data-th-text="${alu.domicilio}"></td>
 					<td>
 						<a class="btn btn-primary" data-th-href="@{/alumno/modificar/}+${alu.lu}">Modificar</a>

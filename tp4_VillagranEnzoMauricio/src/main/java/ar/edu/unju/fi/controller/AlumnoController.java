@@ -57,6 +57,7 @@ public class AlumnoController {
 		boolean edicion = true;
 		Alumno alumnoEncontrado = new Alumno();
 		alumnoEncontrado = CollectionAlumno.buscarAlumno(lu);
+		alumnoEncontrado.getFechaNacimiento();
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("alumno", alumnoEncontrado);
 		model.addAttribute("titulo", "Modificar alumno");
