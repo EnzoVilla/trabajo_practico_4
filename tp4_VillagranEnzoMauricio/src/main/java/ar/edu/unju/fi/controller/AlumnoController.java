@@ -43,7 +43,7 @@ public class AlumnoController {
 		return("alumno");
 	}
 	@PostMapping("/guardar")
-	public ModelAndView guardar(@ModelAttribute("alumno") Alumno alumno) {
+	public ModelAndView guardar(@ModelAttribute("alumno") AlumnoDTO alumnoDTO) {
 		ModelAndView modelAndView = new ModelAndView("alumnos");
 		String mensaje;
 		boolean exito = alumnoService.save(alumnoDTO);
