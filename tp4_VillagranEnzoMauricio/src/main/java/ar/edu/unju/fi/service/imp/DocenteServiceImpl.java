@@ -45,5 +45,8 @@ public class DocenteServiceImpl implements IDocenteService {
 		CollectionDocente.modificarDocente(docenteMapper.toDocente(docenteoDTO));
 
 	}
-
+	@Override
+	public int size() {
+		return CollectionDocente.tamaño();
+	}
 }

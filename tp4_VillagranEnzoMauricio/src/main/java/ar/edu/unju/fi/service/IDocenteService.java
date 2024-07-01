@@ -16,4 +16,5 @@ List<DocenteDTO> findALL();
 	
 	void edit(DocenteDTO docenteDTO) throws Exception;
 	
+	int size();
 }
