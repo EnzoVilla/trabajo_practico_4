@@ -14,6 +14,6 @@ List<DocenteDTO> findALL();
 	
 	void delateBylegajo(int legajo);
 	
-	void edit(DocenteDTO docenteoDTO);
+	void edit(DocenteDTO docenteoDTO) throws Exception;
 	
 }
