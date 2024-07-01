@@ -12,6 +12,8 @@ public interface IAlumnoService {
 	
 	boolean save (AlumnoDTO alumnoDTO);
 	
+	void delateByDni(int dni);
+	
 	void edit(AlumnoDTO alumnoDTO); 
 	
 	
