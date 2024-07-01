@@ -11,22 +11,30 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import ar.edu.unju.fi.collections.CollectionCarrera;
-import ar.edu.unju.fi.collections.CollectionDocente;
-import ar.edu.unju.fi.collections.CollectionMateria;
-import ar.edu.unju.fi.model.Carrera;
-import ar.edu.unju.fi.model.Docente;
-import ar.edu.unju.fi.model.Materia;
+import ar.edu.unju.fi.dto.CarreraDTO;
+import ar.edu.unju.fi.dto.DocenteDTO;
+import ar.edu.unju.fi.dto.MateriaDTO;
+
+import ar.edu.unju.fi.service.ICarreraService;
+import ar.edu.unju.fi.service.IDocenteService;
+import ar.edu.unju.fi.service.IMateriaService;
 
 @Controller
 @RequestMapping("/materia")
 public class MateriaController {
 	@Autowired
-	private Materia materia;
+	private MateriaDTO materiaDTO;
 	@Autowired
-	private Docente docente;
+	private DocenteDTO docenteDTO;
 	@Autowired
-	private Carrera carrera;
+	private CarreraDTO carreraDTO;
+	
+	@Autowired
+	private IMateriaService materiaService;
+	@Autowired
+	private ICarreraService carreraService;
+	@Autowired
+	private IDocenteService docenteService;
 	
 	@GetMapping("/listado")
 	public String getListadoMateria(Model model) {
@@ -34,7 +42,7 @@ public class MateriaController {
 		String mensaje="";
 		model.addAttribute("exito", exito);
 		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("materias", CollectionMateria.getMaterias());
+		model.addAttribute("materias", materiaService.findAll());
 		model.addAttribute("titulo", "Materias");
 		return("materias");
 	}
@@ -43,22 +51,22 @@ public class MateriaController {
 		boolean edicion=false;
 		model.addAttribute("titulo", "Nueva Materia");
 		model.addAttribute("edicion", edicion);
-		model.addAttribute("materia", materia);
-		model.addAttribute("hayDocentes", CollectionDocente.tamaño());
-		model.addAttribute("docentes", CollectionDocente.getDocente());
-		model.addAttribute("hayCarreras", CollectionCarrera.tamaño());
-		model.addAttribute("carreras", CollectionCarrera.getCarreras());
+		model.addAttribute("materia", materiaDTO);
+		model.addAttribute("hayDocentes", docenteService.size());
+		model.addAttribute("docentes", docenteService.findALL());
+		model.addAttribute("hayCarreras", carreraService.size());
+		model.addAttribute("carreras", carreraService.findAll());
 		return("materia");
 	}
 	@PostMapping("/guardar")
-	public ModelAndView guardar(@ModelAttribute("materia") Materia materia) {
+	public ModelAndView guardar(@ModelAttribute("materia") MateriaDTO materiaDTO) {
 		ModelAndView modelAndView = new ModelAndView("materias");
-		carrera = CollectionCarrera.buscarCarrera(materia.getCarrera().getCodigo());
-		materia.setCarrera(carrera);
-		docente = CollectionDocente.buscarDocente(materia.getDocente().getLegajo());
-		materia.setDocente(docente);
+		carreraDTO = carreraService.findById(materiaDTO.getCarrera().getCodigo());
+		materiaDTO.setCarrera(carreraDTO);
+		docenteDTO = docenteService.findByLegajo(materiaDTO.getDocente().getLegajo());
+		materiaDTO.setDocente(docenteDTO);
 		String mensaje;
-		boolean exito = CollectionMateria.agregarMateria(materia);
+		boolean exito = materiaService.save(materiaDTO);
 		if(exito) {
 			mensaje="Se guardo la carrera con exito";
 		}else {
@@ -66,32 +74,32 @@ public class MateriaController {
 		}
 		modelAndView.addObject("exito", exito);
 		modelAndView.addObject("mensaje", mensaje);
-		modelAndView.addObject("materias", CollectionMateria.getMaterias());
+		modelAndView.addObject("materias", materiaService.findAll());
 		return modelAndView;
 	}
 	@GetMapping("/modificar/{codigo}")
 	public String getModificarMateria(Model model, @PathVariable(value="codigo") int codigo) {
 		boolean edicion=true;
-		Materia materiaEncontrada= new Materia();
-		materiaEncontrada = CollectionMateria.buscarMateria(codigo);
+		MateriaDTO materiaEncontrada= new MateriaDTO();
+		materiaEncontrada = materiaService.findById(codigo);
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("materia", materiaEncontrada);
 		model.addAttribute("titulo", "Modificar materia");
-		model.addAttribute("carreras",CollectionCarrera.getCarreras());
-		model.addAttribute("docentes", CollectionDocente.getDocente());
+		model.addAttribute("carreras",carreraService.findAll());
+		model.addAttribute("docentes", docenteService.findALL());
 		return("materia");
 	}
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("materia") Materia materia, Model model) {
+	public String modificarMateria(@ModelAttribute("materia") MateriaDTO materiaDTO, Model model) {
 		boolean exito=false;
 		String mensaje="";
-		carrera = CollectionCarrera.buscarCarrera(materia.getCarrera().getCodigo());
-		docente = CollectionDocente.buscarDocente(materia.getDocente().getLegajo());
-		materia.setCarrera(carrera); 
-		materia.setDocente(docente);
+		carreraDTO = carreraService.findById(materiaDTO.getCarrera().getCodigo());
+		docenteDTO = docenteService.findByLegajo(materiaDTO.getDocente().getLegajo());
+		materiaDTO.setCarrera(carreraDTO); 
+		materiaDTO.setDocente(docenteDTO);
 		try {
-			CollectionMateria.modificarMateria(materia);
-			mensaje="La materia con codigo "+materia.getCodigo()+" fue modificada con exito";
+			materiaService.edit(materiaDTO);
+			mensaje="La materia con codigo "+materiaDTO.getCodigo()+" fue modificada con exito";
 			exito=true;
 		}catch(Exception e) {
 			mensaje=e.getMessage();
@@ -99,13 +107,13 @@ public class MateriaController {
 		}		
 		model.addAttribute("exito", exito);
 		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("materias", CollectionMateria.getMaterias());
+		model.addAttribute("materias", materiaService.findAll());
 		model.addAttribute("titulo", "Materias");
 		return("materias");
 	}
 	@GetMapping("/eliminar/{codigo}")
 	public String eliminarMateria(@PathVariable(value="codigo") int codigo) {
-		CollectionMateria.eliminarMateria(codigo);
+		materiaService.deleteByCod(codigo);
 		return("redirect:/materia/listado");
 	}
 }

@@ -43,5 +43,8 @@ public class CarreraServiceImpl implements ICarreraService {
 	public void edit(CarreraDTO carreraDTO) throws Exception {
 		CollectionCarrera.modificarCarrera(carreraMapper.toCarrera(carreraDTO));
 	}
-
+	@Override
+	public int size() {
+		return CollectionCarrera.tamaño();
+	}
 }

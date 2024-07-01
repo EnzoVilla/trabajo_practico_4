@@ -10,5 +10,5 @@ public interface ICarreraService {
 	boolean save(CarreraDTO carreraDTO);
 	void deleteByCod_carrera(int codigo);
 	void edit(CarreraDTO carreraDTO) throws Exception;
-
+	int size();
 }
