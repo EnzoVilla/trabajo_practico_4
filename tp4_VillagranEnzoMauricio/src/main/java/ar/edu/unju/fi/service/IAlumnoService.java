@@ -14,7 +14,7 @@ public interface IAlumnoService {
 	
 	void delateByDni(int dni);
 	
-	void edit(AlumnoDTO alumnoDTO); 
+	void edit(AlumnoDTO alumnoDTO) throws Exception; 
 	
 	
 
