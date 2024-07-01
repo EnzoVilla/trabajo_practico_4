@@ -8,11 +8,11 @@ public interface IAlumnoService {
 	
 	List<AlumnoDTO> findALL();
 	
-	AlumnoDTO findByDni(int dni);
+	AlumnoDTO findByLu(int lu);
 	
 	boolean save (AlumnoDTO alumnoDTO);
 	
-	void delateByDni(int dni);
+	void delateByLu(int lu);
 	
 	void edit(AlumnoDTO alumnoDTO) throws Exception; 
 	

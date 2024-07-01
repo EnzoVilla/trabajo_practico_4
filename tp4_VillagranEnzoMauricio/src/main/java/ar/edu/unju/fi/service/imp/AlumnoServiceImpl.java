@@ -24,8 +24,8 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	}
 
 	@Override
-	public AlumnoDTO findByDni(int dni) {
-		AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(CollectionAlumno.buscarAlumno(dni));
+	public AlumnoDTO findByLu(int lu) {
+		AlumnoDTO alumnoDTO = alumnoMapper.toAlumnoDTO(CollectionAlumno.buscarAlumno(lu));
 		return alumnoDTO;
 	}
 
@@ -36,8 +36,8 @@ public class AlumnoServiceImpl implements IAlumnoService {
 	}
 
 	@Override
-	public void delateByDni(int dni) {
-		CollectionAlumno.eliminarAlumno(dni);
+	public void delateByLu(int lu) {
+		CollectionAlumno.eliminarAlumno(lu);
 	}
 	
 	@Override
