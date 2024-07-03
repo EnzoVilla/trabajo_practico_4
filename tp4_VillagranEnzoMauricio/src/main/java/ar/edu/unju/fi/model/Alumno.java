@@ -5,14 +5,15 @@ import java.time.LocalDate;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
 
+import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+@Entity
 @Component
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
 public class Alumno {
 	private String dni;
 	private String nombre;
@@ -22,6 +23,6 @@ public class Alumno {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNacimiento;
 	private String domicilio;
-	private int lu;
+	private Integer lu;
 	
 }
