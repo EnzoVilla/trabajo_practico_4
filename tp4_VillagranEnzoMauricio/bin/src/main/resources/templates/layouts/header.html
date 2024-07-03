@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head th:fragment="head">
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title data-th-text="${titulo}"></title>
+	<link rel="stylesheet" data-th-href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+	<link href="https://fonts.googleapis.com/css2?family=Sofia+Sans+Semi+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+	<link rel="stylesheet" data-th-href="@{/css/style.css}" >
+</head>
+<body>
+	<header th:fragment="header" class="d-flex justify-content-center align-items-center p-3">
+        <img class="m-3" data-th-src="@{/images/logo-fi-unju.png}" alt="Logo" width="auto" height="100">
+        <h1 class="m-3">Más allá de los límites, con código</h1>
+        <img class="m-3" data-th-src="@{/images/logounju.png}" alt="" width="auto" height="100">
+    </header>
+    <nav th:fragment="navbar" class="navbar" style="background-color: #e3f2fd;">
+	        <div class="container-fluid justify-content-center">
+	            <ul class="nav ">
+	                <li class="nav-item">
+	                    <a class="nav-link" data-th-href="@{/inicio}">Inicio</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a data-th-href="@{/carrera/listado}" class="nav-link">Carreras</a>
+	                </li>
+	                <li class="nav-item">
+	                   <a data-th-href="@{/materia/listado}" class="nav-link">Materias</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a data-th-href="@{/docente/listado}" class="nav-link">Docentes</a>
+	                </li>
+	                <li class="nav-item">
+	                    <a data-th-href="@{/alumno/listado}" class="nav-link">Alumnos</a>
+	                </li>
+	            </ul>
+	        </div>
+   	   </nav>
+   	   <script type="text/javascript" data-th-src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
