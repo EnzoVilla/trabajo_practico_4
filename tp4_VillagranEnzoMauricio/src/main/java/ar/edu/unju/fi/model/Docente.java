@@ -16,13 +16,16 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 public class Docente {
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Integer legajo;
-	private String nombre;
-	private String apellido;
-	private String email;
-	private long telefono;
 
-	
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer legajo;  
+
+    private String nombre;
+    private String apellido;
+    private String email;
+    private long telefono;  
+
+ 
+
 }
