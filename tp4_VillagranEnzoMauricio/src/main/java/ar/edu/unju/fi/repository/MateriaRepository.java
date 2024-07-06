@@ -10,5 +10,5 @@ import ar.edu.unju.fi.model.Materia;
 
 @Repository
 public interface MateriaRepository extends JpaRepository<Materia,Integer> {
-	List<Materia> findByEstadoTrue();
+	
 }
