@@ -10,7 +10,7 @@ List<DocenteDTO> findALL();
 	
 	DocenteDTO findByLegajo(int legajo);
 	
-	boolean save(DocenteDTO docenteDTO);
+	DocenteDTO save(DocenteDTO docenteDTO);
 	
 	void delateBylegajo(int legajo);
 	

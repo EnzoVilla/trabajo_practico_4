@@ -14,9 +14,10 @@
 		<div class="row">
 			<form data-th-action="${edicion}?@{/docente/modificar}:@{/docente/guardar}" th:object="${docente}" method="post">
 				<div class="d-flex justify-content-center mb-3">
-					<label for="legajo" class="me-2">Legajo</label>
-					<input id="legajo" type="number" name="legajo" th:field="*{legajo}" th:disabled="${edicion}?true:false" required>
-					<input id="legajo" type="hidden" name="legajo" th:field="*{legajo}" th:if="${edicion}">
+<!-- 					<label for="legajo" class="me-2">Legajo</label> -->
+<!-- 					<input id="legajo" type="number" name="legajo" th:field="*{legajo}" th:disabled="${edicion}?true:false" required> -->
+<!-- 					<input id="legajo" type="hidden" name="legajo" th:field="*{legajo}" th:if="${edicion}"> -->
+						 <input type="hidden" name="legajo" th:value="${docente.legajo}">
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="nombreDocente" class="me-2">Nombre</label>
