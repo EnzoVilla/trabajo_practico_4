@@ -16,6 +16,7 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -51,6 +52,12 @@ public class Alumno {
 	
 	@Column(name="alumno_domicilio", nullable = false)
 	private String domicilio;
+	
+	
+	@NotNull(message = "Debe seleccionar un estado!")
+	@Column(name="estado_alumno", nullable = false, columnDefinition = "boolean default true")
+	private boolean estado=true;
+	
 	
 	@ManyToOne
 	@JoinColumn(name="carrera_id")

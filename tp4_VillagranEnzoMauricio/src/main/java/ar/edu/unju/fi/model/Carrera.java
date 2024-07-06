@@ -13,6 +13,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,8 +35,11 @@ public class Carrera {
 	@Column(name="cantidadAnios_carrera", nullable = false)
 	private int cantAnios;
 	
-	@Column(name="estado_carrera", nullable = false)
-	private boolean estado;
+	 @NotNull(message = "Debe seleccionar un estado!")
+	@Column(name="estado_carrera", nullable = false, columnDefinition = "boolean default true")
+	private boolean estado=true;
+	
+	
 	
 	@OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Materia> materias = new ArrayList<>();
