@@ -8,7 +8,7 @@ public interface IMateriaService {
 
 	List<MateriaDTO> findAll();
 	MateriaDTO findById(int codigo);
-	boolean save(MateriaDTO materiaDTO);
+	MateriaDTO save(MateriaDTO materiaDTO);
 	void deleteByCod(int codigo);
 	void edit(MateriaDTO materiaDTO) throws Exception;
 }

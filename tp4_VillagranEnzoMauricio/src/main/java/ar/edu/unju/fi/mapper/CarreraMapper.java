@@ -18,7 +18,9 @@ public interface CarreraMapper {
 		@Mapping(source="cantAnios",target="cantAnios"),
 		@Mapping(source="codigo",target="codigo"),
 		@Mapping(source="estado",target="estado"),
-		@Mapping(source="nombre",target="nombre")
+		@Mapping(source="nombre",target="nombre"),
+		@Mapping(source="materias",target="materias", ignore = true),
+		@Mapping(source="alumnos",target="alumnos", ignore = true)
 	})
 	CarreraDTO toCarreraDTO(Carrera carrera);
 	@InheritInverseConfiguration 

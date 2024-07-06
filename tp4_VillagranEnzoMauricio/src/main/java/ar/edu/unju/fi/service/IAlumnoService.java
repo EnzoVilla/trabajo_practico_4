@@ -10,7 +10,7 @@ public interface IAlumnoService {
 	
 	AlumnoDTO findByLu(int lu);
 	
-	boolean save (AlumnoDTO alumnoDTO);
+	AlumnoDTO save (AlumnoDTO alumnoDTO);
 	
 	void delateByLu(int lu);
 	

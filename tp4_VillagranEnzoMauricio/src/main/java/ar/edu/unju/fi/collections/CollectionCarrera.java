@@ -37,7 +37,7 @@ public class CollectionCarrera {
 				if(carre.getCodigo()==carrera.getCodigo()) {
 					carre.setNombre(carrera.getNombre());
 					carre.setCantAnios(carrera.getCantAnios());
-					carre.setEstado(carrera.isEstado());
+					//carre.setEstado(carrera.isEstado());
 					encontrado=true;
 				}
 			}

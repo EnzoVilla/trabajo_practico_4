@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -14,4 +17,7 @@ public class CarreraDTO {
 	private String nombre;
 	private int cantAnios;
 	private boolean estado;
+	
+	private List<AlumnoDTO> alumnos = new ArrayList<AlumnoDTO>();
+	private List<MateriaDTO> materias = new ArrayList<MateriaDTO>();
 }

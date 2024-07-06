@@ -17,13 +17,10 @@ import lombok.NoArgsConstructor;
 @Component
 @Data
 @NoArgsConstructor
-
 public class Docente {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-  
-    
+    @GeneratedValue(strategy = GenerationType.IDENTITY)  
     @Column(name = "docente_legajo", nullable = false)
     private Integer legajo;  
 

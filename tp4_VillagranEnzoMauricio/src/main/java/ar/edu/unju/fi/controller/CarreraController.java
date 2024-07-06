@@ -48,7 +48,8 @@ public class CarreraController {
 		ModelAndView modelAndView = new ModelAndView("carreras"); //nombre de la pagina hacia donde quiero ir, hacia donde quiero llevar el objeto "carrera"
 		carreraDTO.setEstado(true);
 		String mensaje;
-		boolean exito = carreraService.save(carreraDTO);//CollectionCarrera es la clase estatica
+		boolean exito = true;
+		carreraService.save(carreraDTO);//CollectionCarrera es la clase estatica
 		if(exito) {
 			mensaje="Se guardo la carrera con exito";
 		}else {

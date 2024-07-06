@@ -46,7 +46,7 @@ public class Materia {
 	
 	@NotNull(message = "Debe seleccionar un estado!")
 	@Column(name="estado_materia", nullable = false, columnDefinition = "boolean default true")
-	private boolean estado=true;
+	private Boolean estado=true;
 	
 	
 	 	@OneToOne
