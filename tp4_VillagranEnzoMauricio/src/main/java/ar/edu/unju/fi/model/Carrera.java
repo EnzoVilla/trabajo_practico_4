@@ -37,7 +37,7 @@ public class Carrera {
 	
 	 @NotNull(message = "Debe seleccionar un estado!")
 	@Column(name="estado_carrera", nullable = false, columnDefinition = "boolean default true")
-	private boolean estado=true;
+	private Boolean estado=true;
 	
 	
 	

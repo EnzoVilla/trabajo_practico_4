@@ -17,6 +17,10 @@ public interface AlumnoMapper {
 	@Mapping(source="apellido",target="apellido")
 	@Mapping(source="email",target="email")
 	@Mapping(source="telefono",target="telefono")
+	@Mapping(source="lu",target="lu")
+	@Mapping(source="fechaNacimiento", target="fechaNacimiento")
+	@Mapping(source="domicilio",target="domicilio")
+	@Mapping(source="estado",target="estado")
 	AlumnoDTO toAlumnoDTO(Alumno alumno);
 	
 	@InheritInverseConfiguration

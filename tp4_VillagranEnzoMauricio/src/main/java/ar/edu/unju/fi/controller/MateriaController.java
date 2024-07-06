@@ -66,7 +66,8 @@ public class MateriaController {
 		docenteDTO = docenteService.findByLegajo(materiaDTO.getDocente().getLegajo());
 		materiaDTO.setDocente(docenteDTO);
 		String mensaje;
-		boolean exito = materiaService.save(materiaDTO);
+		boolean exito = true; 
+		materiaService.save(materiaDTO);
 		if(exito) {
 			mensaje="Se guardo la carrera con exito";
 		}else {

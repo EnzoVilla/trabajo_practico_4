@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Component;
@@ -24,4 +26,7 @@ public class AlumnoDTO {
 	private LocalDate fechaNacimiento;
 	private String domicilio;
 	private int lu;
+	private boolean estado;
+	private CarreraDTO carreraDTO;
+	private List<MateriaDTO> materias = new ArrayList<MateriaDTO>();
 }

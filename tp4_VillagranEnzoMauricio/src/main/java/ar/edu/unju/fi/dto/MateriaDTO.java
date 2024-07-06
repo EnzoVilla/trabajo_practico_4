@@ -1,5 +1,8 @@
 package ar.edu.unju.fi.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 
@@ -19,4 +22,6 @@ public class MateriaDTO {
 	private String modalidad;
 	private DocenteDTO docente;
 	private CarreraDTO carrera;
+	private boolean estado;
+	private List<AlumnoDTO> alumnos = new ArrayList<AlumnoDTO>();
 }

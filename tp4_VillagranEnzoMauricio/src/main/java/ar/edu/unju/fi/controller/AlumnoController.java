@@ -43,7 +43,8 @@ public class AlumnoController {
 	public ModelAndView guardar(@ModelAttribute("alumno") AlumnoDTO alumnoDTO) {
 		ModelAndView modelAndView = new ModelAndView("alumnos");
 		String mensaje;
-		boolean exito = alumnoService.save(alumnoDTO);
+		boolean exito = true; 
+		alumnoService.save(alumnoDTO);
 		if(exito) {
 			mensaje="Se guardo al Alumno con exito";
 		}else {

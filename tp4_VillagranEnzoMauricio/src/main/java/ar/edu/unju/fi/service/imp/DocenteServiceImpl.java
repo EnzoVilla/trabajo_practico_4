@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import ar.edu.unju.fi.collections.CollectionDocente;
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.mapper.DocenteMapper;
 import ar.edu.unju.fi.model.Docente;
@@ -23,8 +22,8 @@ public class DocenteServiceImpl implements IDocenteService {
 	
 	@Override
 	public List<DocenteDTO> findALL() {
-		List<Docente> docentes = docenteRepository.findByEstadoTrue();
-		return docenteMapper.toDocenteDTOList(docentes);
+		List<DocenteDTO> docenteDTOs =  docenteMapper.toDocenteDTOList(docenteRepository.findAll());
+		return docenteDTOs;
 	}
 
 	@Override
@@ -44,45 +43,23 @@ public class DocenteServiceImpl implements IDocenteService {
 
 	@Override
 	public void delateBylegajo(int legajo) {
-	//	CollectionDocente.eliminarDocente(legajo);
-		docenteRepository.findById(legajo).ifPresentOrElse(docente -> {
-			docente.setEstado(false);
-			docenteRepository.save(docente);
-		}, () -> {
-			System.out.println("Paso por aca");
-		});
-	
-	
+		Docente docente = docenteRepository.findById(legajo).orElse(null);
+		docente.setEstado(false);
+		docenteRepository.save(docente);
 	}
 
 	@Override
 	public void edit(DocenteDTO docenteoDTO) throws Exception {
-		 // Imprime el DTO recibido
-	    System.out.println("DocenteDTO recibido: " + docenteoDTO);
-
-	    // Imprime el legajo recibido en el DTO para verificar
-	    int legajoprueba = docenteoDTO.getLegajo();
-	    System.out.println("Legajo recibido en DTO: " + legajoprueba);
-
-	    // Mapea el DTO a la entidad Docente
-	    Docente docente = docenteMapper.toDocente(docenteoDTO);
-
-	    // Imprime el legajo de la entidad Docente después del mapeo
-	    Integer legajo = docente.getLegajo();
-	    System.out.println("Legajo en Docente entity: " + legajo);
-
-	    // Verifica si el Docente existe por el legajo en la base de datos
-	    if (!docenteRepository.existsById(legajo)) {
-	        throw new Exception("No se encuentra el docente solicitado con legajo: " + legajo);
+		Docente docente = docenteMapper.toDocente(docenteoDTO);
+	    if (!docenteRepository.existsById(docente.getLegajo())) {
+	        throw new Exception("No se encuentra el docente solicitado");
 	    }
-
-	    // Guarda el docente actualizado en la base de datos
 	    docenteRepository.save(docente);
 	}
 	
 	@Override
 	public int size() {
-		return CollectionDocente.tamaño();
+		return (int) docenteRepository.count();
 	}
 
 	
