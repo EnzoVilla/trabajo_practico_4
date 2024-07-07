@@ -65,11 +65,12 @@ public class MateriaController {
 		materiaDTO.setCarrera(carreraDTO);
 		docenteDTO = docenteService.findByLegajo(materiaDTO.getDocente().getLegajo());
 		materiaDTO.setDocente(docenteDTO);
+		materiaDTO.setEstado(true);
 		String mensaje;
 		boolean exito = true; 
 		materiaService.save(materiaDTO);
 		if(exito) {
-			mensaje="Se guardo la carrera con exito";
+			mensaje="Se guardo la materia con exito";
 		}else {
 			mensaje="No se pudo guardar";
 		}
@@ -98,6 +99,7 @@ public class MateriaController {
 		docenteDTO = docenteService.findByLegajo(materiaDTO.getDocente().getLegajo());
 		materiaDTO.setCarrera(carreraDTO); 
 		materiaDTO.setDocente(docenteDTO);
+		materiaDTO.setEstado(true);
 		try {
 			materiaService.edit(materiaDTO);
 			mensaje="La materia con codigo "+materiaDTO.getCodigo()+" fue modificada con exito";

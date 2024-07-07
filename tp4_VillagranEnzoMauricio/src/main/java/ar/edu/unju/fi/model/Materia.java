@@ -17,7 +17,6 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -44,9 +43,8 @@ public class Materia {
 	@Column(name="modalidad_materia", nullable = false)
 	private String modalidad;
 	
-	@NotNull(message = "Debe seleccionar un estado!")
-	@Column(name="estado_materia", nullable = false, columnDefinition = "boolean default true")
-	private Boolean estado=true;
+	@Column(name="estado_materia", nullable = false)
+	private Boolean estado;
 	
 	
 	 	@OneToOne

@@ -14,9 +14,10 @@
 		<div>
 			<form data-th-action="${edicion}?@{/alumno/modificar}:@{/alumno/guardar}" th:object="${alumno}" method="post">
 				<div class="d-flex justify-content-center mb-3">
-					<label for="lu" class="me-2">LU</label>
+					<!-- <label for="lu" class="me-2">LU</label>
 					<input id="lu" type="number" name="lu" th:field="*{lu}" th:disabled="${edicion}?true:false" required>
-					<input id="lu" type="hidden" name="lu" th:field="*{lu}" th:if="${edicion}">
+					<input id="lu" type="hidden" name="lu" th:field="*{lu}" th:if="${edicion}"> -->
+					<input type="hidden" name="lu" th:value="${alumno.lu}">
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="dni" class="me-2">DNI</label>
