@@ -75,6 +75,7 @@ public class CarreraController {
 	public String modificarCarrera(@ModelAttribute("carrera") CarreraDTO carreraDTO, Model model) {
 		boolean exito=false;
 		String mensaje="";
+		carreraDTO.setEstado(true);
 		try {
 			carreraService.edit(carreraDTO); //debo capturar el error que mande hacia aqui con throw
 			mensaje="La carrera con codigo "+carreraDTO.getCodigo()+" fue modificada con exito";

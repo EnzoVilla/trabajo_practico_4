@@ -43,10 +43,11 @@ public class AlumnoController {
 	public ModelAndView guardar(@ModelAttribute("alumno") AlumnoDTO alumnoDTO) {
 		ModelAndView modelAndView = new ModelAndView("alumnos");
 		String mensaje;
-		boolean exito = true; 
+		boolean exito = true;
+		alumnoDTO.setEstado(true);
 		alumnoService.save(alumnoDTO);
 		if(exito) {
-			mensaje="Se guardo al Alumno con exito";
+			mensaje="Se guardo el alumno con exito";
 		}else {
 			mensaje="No se pudo guardar";
 		}
@@ -70,6 +71,7 @@ public class AlumnoController {
 	public String modificarAlumno(@ModelAttribute("alumno") AlumnoDTO alumnoDTO, Model model) {
 		boolean exito=false;
 		String mensaje="";
+		alumnoDTO.setEstado(true);
 		try {
 			alumnoService.edit(alumnoDTO);
 			mensaje="El alumno con libreta "+alumnoDTO.getLu()+" fue modificada con exito";

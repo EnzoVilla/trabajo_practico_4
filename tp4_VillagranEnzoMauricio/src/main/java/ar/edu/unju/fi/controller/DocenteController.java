@@ -43,6 +43,7 @@ public class DocenteController {
 	public ModelAndView guardar(@ModelAttribute("docente") DocenteDTO docenteDTO) {
 		ModelAndView modelAndView = new ModelAndView("docentes");
 		boolean exito = true; 
+		docenteDTO.setEstado(true);
 		docenteService.save(docenteDTO);
 		String mensaje;
 		if(exito) {
@@ -71,6 +72,7 @@ public class DocenteController {
 	public String modificarDocente(@ModelAttribute("docente") DocenteDTO docenteDTO, Model model) {
 		boolean exito=false;
 		String mensaje="";
+		docenteDTO.setEstado(true);
 		try {
 			docenteService.edit(docenteDTO);
 			mensaje="El docente con legajo "+docenteDTO.getLegajo()+" se modifico con exito";

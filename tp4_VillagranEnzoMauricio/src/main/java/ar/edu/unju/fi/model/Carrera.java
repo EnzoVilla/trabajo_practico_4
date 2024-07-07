@@ -13,7 +13,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -35,9 +34,8 @@ public class Carrera {
 	@Column(name="cantidadAnios_carrera", nullable = false)
 	private int cantAnios;
 	
-	 @NotNull(message = "Debe seleccionar un estado!")
-	@Column(name="estado_carrera", nullable = false, columnDefinition = "boolean default true")
-	private Boolean estado=true;
+	@Column(name="estado_carrera", nullable = false)
+	private Boolean estado;
 	
 	
 	
