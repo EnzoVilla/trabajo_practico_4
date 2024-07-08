@@ -4,6 +4,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,7 @@ import ar.edu.unju.fi.dto.MateriaDTO;
 import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.service.IMateriaService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/materia")
@@ -59,8 +61,18 @@ public class MateriaController {
 		return("materia");
 	}
 	@PostMapping("/guardar")
-	public ModelAndView guardar(@ModelAttribute("materia") MateriaDTO materiaDTO) {
+	public ModelAndView guardar(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result) {
 		ModelAndView modelAndView = new ModelAndView("materias");
+		if(result.hasErrors()) {
+			modelAndView.setViewName("materia");
+			modelAndView.addObject("edicion", false);
+			modelAndView.addObject("titulo", "Nueva Materia");
+			modelAndView.addObject("hayDocentes", docenteService.size());
+			modelAndView.addObject("docentes", docenteService.findALL());
+			modelAndView.addObject("hayCarreras", carreraService.size());
+			modelAndView.addObject("carreras", carreraService.findAll());
+			return modelAndView;
+		}
 		carreraDTO = carreraService.findById(materiaDTO.getCarrera().getCodigo());
 		materiaDTO.setCarrera(carreraDTO);
 		docenteDTO = docenteService.findByLegajo(materiaDTO.getDocente().getLegajo());
@@ -92,7 +104,16 @@ public class MateriaController {
 		return("materia");
 	}
 	@PostMapping("/modificar")
-	public String modificarMateria(@ModelAttribute("materia") MateriaDTO materiaDTO, Model model) {
+	public String modificarMateria(@Valid @ModelAttribute("materia") MateriaDTO materiaDTO, BindingResult result, Model model) {
+		 if (result.hasErrors()) {
+	 	       model.addAttribute("edicion", true);
+	 	       model.addAttribute("titulo", "Modificar materia");
+	 	       model.addAttribute("hayDocentes", docenteService.size());
+	 	       model.addAttribute("docentes", docenteService.findALL());
+	 	       model.addAttribute("hayCarreras", carreraService.size());
+	 	       model.addAttribute("carreras", carreraService.findAll());
+	 	       return("materia");
+		 }
 		boolean exito=false;
 		String mensaje="";
 		carreraDTO = carreraService.findById(materiaDTO.getCarrera().getCodigo());

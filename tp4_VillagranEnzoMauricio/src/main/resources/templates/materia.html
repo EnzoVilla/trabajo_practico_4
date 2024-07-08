@@ -21,15 +21,18 @@
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="nombreMateria" class="me-2">Nombre</label>
-					<input id="nombreMateria" type="text" name="nombreMateria" th:field="*{nombre}" required>		
+					<input id="nombreMateria" type="text" name="nombre" th:field="*{nombre}"  placeholder="Ingrese nombre de la materia" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" >
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>		
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="curso" class="me-2">Curso</label>
-					<input id="curso" type="text" name="curso" th:field="*{curso}" required>		
+					<input id="curso" type="text" name="curso" th:field="*{curso}"  placeholder="Ingrese el año correspondiente de la materia" th:classappend="${#fields.hasErrors('curso')} ? 'is-invalid' : ''" >
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></p>		
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="cantHoras" class="me-2">Horas catedra</label>
-					<input id="cantHoras" type="text" name="cantHoras" th:field="*{cantHoras}" required>		
+					<input id="cantHoras" type="text" name="cantHoras" th:field="*{cantHoras}" placeholder="Ingrese nombre/s" th:classappend="${#fields.hasErrors('cantHoras')} ? 'is-invalid' : ''" >
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('cantHoras')}" th:errors="*{cantHoras}"></p>	
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="modalidad" class="me-2">Modalidad:</label>
