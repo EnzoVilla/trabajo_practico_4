@@ -13,6 +13,10 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -28,9 +32,13 @@ public class Carrera {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
+	@NotBlank(message="Debe ingresar el nombre de la carrera")
 	@Column(name="carrera_nombre", nullable = false)
 	private String nombre;
 	
+	@NotNull(message="Debe ingresar valores numericos")
+	@Min(value=1,message= "Debe ingresar un número mayor o igual a 1 ")
+	@Max(value=8,message="Debe ingresar un número menor o igual a 8")
 	@Column(name="cantidadAnios_carrera", nullable = false)
 	private int cantAnios;
 	

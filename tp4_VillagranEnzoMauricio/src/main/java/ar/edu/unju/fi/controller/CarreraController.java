@@ -3,6 +3,7 @@ package ar.edu.unju.fi.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,6 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.dto.CarreraDTO;
 
 import ar.edu.unju.fi.service.ICarreraService;
+import jakarta.validation.Valid;
 
 @Controller
 @RequestMapping("/carrera")
@@ -41,11 +43,17 @@ public class CarreraController {
 		return ("carrera");
 	}
 	@PostMapping("/guardar")
-	public ModelAndView guardar(@ModelAttribute("carrera") CarreraDTO carreraDTO) {
+	public ModelAndView guardar(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO, BindingResult result) {
 		//@ModelAttribute hace referencia a un objeto que se va a enviar desde el formulario y que se recibe en este metodo
 		// el nombre "carrera" tiene que ser el que este en th:object
 		// el Carrera carrera es el tipo de objeto que almacenara "carrera"
 		ModelAndView modelAndView = new ModelAndView("carreras"); //nombre de la pagina hacia donde quiero ir, hacia donde quiero llevar el objeto "carrera"
+		if(result.hasErrors()) {
+			modelAndView.setViewName("carrera");
+			modelAndView.addObject("edicion", false);
+			modelAndView.addObject("titulo", "Nueva carrera");
+			return modelAndView;
+		}
 		carreraDTO.setEstado(true);
 		String mensaje;
 		boolean exito = true;
@@ -72,7 +80,12 @@ public class CarreraController {
 		return("carrera");
 	}
 	@PostMapping("/modificar")
-	public String modificarCarrera(@ModelAttribute("carrera") CarreraDTO carreraDTO, Model model) {
+	public String modificarCarrera(@Valid @ModelAttribute("carrera") CarreraDTO carreraDTO, BindingResult result, Model model) {
+		 if (result.hasErrors()) {
+ 	        model.addAttribute("edicion", true);
+ 	        model.addAttribute("titulo", "Modificar carrera");
+ 	       return("carrera");
+ 	    }
 		boolean exito=false;
 		String mensaje="";
 		carreraDTO.setEstado(true);

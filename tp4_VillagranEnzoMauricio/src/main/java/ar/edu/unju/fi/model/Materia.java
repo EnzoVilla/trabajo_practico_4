@@ -17,6 +17,8 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,12 +33,17 @@ public class Materia {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer codigo;
 	
+	@NotBlank(message="Debe ingresar el nombre de la materia")
 	@Column(name="materia_nombre", nullable = false)
 	private String nombre;
 	
+	@Pattern(regexp= "[0-9]*", message="Debe ingresar valores numericos")
+	@NotBlank(message="Debe ingresar el año en el que se cursa")
 	@Column(name="materia_curso", nullable = false)
 	private String curso;
 	
+	@Pattern(regexp= "[0-9]*", message="Debe ingresar valores numericos")
+	@NotBlank(message="Debe ingresar las horas catedra")
 	@Column(name="cantHoras_materia", nullable = false)
 	private String cantHoras;
 	
