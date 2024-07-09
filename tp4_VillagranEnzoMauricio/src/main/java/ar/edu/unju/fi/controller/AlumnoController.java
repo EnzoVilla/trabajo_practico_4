@@ -30,7 +30,7 @@ public class AlumnoController {
         String mensaje="";
         model.addAttribute("exito", exito);
         model.addAttribute("mensaje", mensaje);
-        model.addAttribute("alumnos", alumnoService.findALL());
+        model.addAttribute("alumnos", alumnoService.findAlumnosByEstadoTrue());
         model.addAttribute("titulo", "Alumnos");
         return "alumnos";
     }
@@ -65,7 +65,7 @@ public class AlumnoController {
         }
         modelAndView.addObject("exito", exito);
         modelAndView.addObject("mensaje", mensaje);
-        modelAndView.addObject("alumnos", alumnoService.findALL());
+        modelAndView.addObject("alumnos", alumnoService.findAlumnosByEstadoTrue());
         return modelAndView;
     }
     
@@ -100,7 +100,7 @@ public class AlumnoController {
         }
         model.addAttribute("mensaje", mensaje);
         model.addAttribute("exito", exito);
-        model.addAttribute("alumnos", alumnoService.findALL());
+        model.addAttribute("alumnos", alumnoService.findAlumnosByEstadoTrue());
         model.addAttribute("titulo", "Alumnos");
         return "alumnos";
     }

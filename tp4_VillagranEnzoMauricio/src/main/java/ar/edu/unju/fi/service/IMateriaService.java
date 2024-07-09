@@ -6,9 +6,9 @@ import ar.edu.unju.fi.dto.MateriaDTO;
 
 public interface IMateriaService {
 
-	List<MateriaDTO> findAll();
 	MateriaDTO findById(int codigo);
 	MateriaDTO save(MateriaDTO materiaDTO);
 	void deleteByCod(int codigo);
 	void edit(MateriaDTO materiaDTO) throws Exception;
+	List<MateriaDTO> findMateriasByEstadoTrue();
 }

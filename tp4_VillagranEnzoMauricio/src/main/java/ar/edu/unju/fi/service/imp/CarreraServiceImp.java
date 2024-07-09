@@ -1,7 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
 import java.util.List;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,16 +21,15 @@ public class CarreraServiceImp implements ICarreraService {
 	CarreraMapper carreraMapper;
 	@Autowired 
 	CarreraRepository carreraRepository;
-	
 	@Override
-	public List<CarreraDTO> findAll() {
+	public List<CarreraDTO> findCarrerasByEstadoTrue() {
 		LOGGER.info("SERVICE: ICarreraService -> CarreraServiceImp");
-		LOGGER.info("METHOD: findALL()");
-		LOGGER.info("RESULT: una lista de carreras DTO");
-		List<CarreraDTO> carreraDTOs = carreraMapper.toCarreraDTOList(carreraRepository.findAll());
-		return carreraDTOs;
+		LOGGER.info("METHOD: findCarrerasByEstadoTrue()");
+		LOGGER.info("RESULT: una lista de carreras DTO con estado TRUE");
+		List<Carrera> carrerasActivas;
+		carrerasActivas = carreraRepository.findByEstadoTrue();
+		return carreraMapper.toCarreraDTOList(carrerasActivas);
 	}
-
 	@Override
 	public CarreraDTO findById(int codigo) {
 		LOGGER.info("SERVICE: ICarreraService -> CarreraServiceImp");
@@ -80,5 +78,6 @@ public class CarreraServiceImp implements ICarreraService {
 		LOGGER.info("RESULT: cuenta las entidades del repositorio");
 		return (int) carreraRepository.count();
 	}
+
 
 }

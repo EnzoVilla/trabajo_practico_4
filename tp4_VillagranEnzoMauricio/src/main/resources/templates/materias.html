@@ -30,7 +30,7 @@
 						<th>Opciones</th>
 					</tr>
 				</thead>
-				<tbody data-th-each="mate : ${materias}" data-th-if="${mate.estado}">
+				<tbody data-th-each="mate : ${materias}"> <!-- data-th-if="${mate.estado}" -->
 					<tr>
 						<td data-th-text="${mate.codigo}"></td>
 						<td data-th-text="${mate.nombre}"> </td>

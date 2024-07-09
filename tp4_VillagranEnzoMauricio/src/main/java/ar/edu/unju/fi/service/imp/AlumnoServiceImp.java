@@ -22,13 +22,14 @@ public class AlumnoServiceImp implements IAlumnoService {
 	@Autowired
 	private AlumnoRepository alumnoRepository;
 	
+	
 	@Override
-	public List<AlumnoDTO> findALL() {
+	public List<AlumnoDTO> findAlumnosByEstadoTrue() {
 		LOGGER.info("SERVICE: IAlumnoService -> AlumnoServiceImp");
-		LOGGER.info("METHOD: findALL()");
-		LOGGER.info("RESULT: una lista de Alumnos DTO");
-		List<AlumnoDTO> alumnoDTOs = alumnoMapper.toAlumnoDTOList(alumnoRepository.findAll()); 
-		return alumnoDTOs;
+		LOGGER.info("METHOD: findAlumnosByEstadoTrue()");
+		LOGGER.info("RESULT: una lista de Alumnos DTO con estado TRUE");
+		List<Alumno> alumnosActivos = alumnoRepository.findByEstadoTrue();
+		return alumnoMapper.toAlumnoDTOList(alumnosActivos);
 	}
 
 	@Override
@@ -71,5 +72,7 @@ public class AlumnoServiceImp implements IAlumnoService {
 		}
 		alumnoRepository.save(alumno);
 	}
+
+	
 
 }
