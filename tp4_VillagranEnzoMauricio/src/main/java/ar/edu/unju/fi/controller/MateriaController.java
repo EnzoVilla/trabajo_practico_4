@@ -44,7 +44,7 @@ public class MateriaController {
 		String mensaje="";
 		model.addAttribute("exito", exito);
 		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("materias", materiaService.findAll());
+		model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
 		model.addAttribute("titulo", "Materias");
 		return("materias");
 	}
@@ -55,9 +55,9 @@ public class MateriaController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("materia", materiaDTO);
 		model.addAttribute("hayDocentes", docenteService.size());
-		model.addAttribute("docentes", docenteService.findALL());
+		model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
 		model.addAttribute("hayCarreras", carreraService.size());
-		model.addAttribute("carreras", carreraService.findAll());
+		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
 		return("materia");
 	}
 	@PostMapping("/guardar")
@@ -68,9 +68,9 @@ public class MateriaController {
 			modelAndView.addObject("edicion", false);
 			modelAndView.addObject("titulo", "Nueva Materia");
 			modelAndView.addObject("hayDocentes", docenteService.size());
-			modelAndView.addObject("docentes", docenteService.findALL());
+			modelAndView.addObject("docentes", docenteService.findDocentesByEstadoTrue());
 			modelAndView.addObject("hayCarreras", carreraService.size());
-			modelAndView.addObject("carreras", carreraService.findAll());
+			modelAndView.addObject("carreras", carreraService.findCarrerasByEstadoTrue());
 			return modelAndView;
 		}
 		carreraDTO = carreraService.findById(materiaDTO.getCarrera().getCodigo());
@@ -88,7 +88,7 @@ public class MateriaController {
 		}
 		modelAndView.addObject("exito", exito);
 		modelAndView.addObject("mensaje", mensaje);
-		modelAndView.addObject("materias", materiaService.findAll());
+		modelAndView.addObject("materias", materiaService.findMateriasByEstadoTrue());
 		return modelAndView;
 	}
 	@GetMapping("/modificar/{codigo}")
@@ -99,8 +99,8 @@ public class MateriaController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("materia", materiaEncontrada);
 		model.addAttribute("titulo", "Modificar materia");
-		model.addAttribute("carreras",carreraService.findAll());
-		model.addAttribute("docentes", docenteService.findALL());
+		model.addAttribute("carreras",carreraService.findCarrerasByEstadoTrue());
+		model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
 		return("materia");
 	}
 	@PostMapping("/modificar")
@@ -109,9 +109,9 @@ public class MateriaController {
 	 	       model.addAttribute("edicion", true);
 	 	       model.addAttribute("titulo", "Modificar materia");
 	 	       model.addAttribute("hayDocentes", docenteService.size());
-	 	       model.addAttribute("docentes", docenteService.findALL());
+	 	       model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
 	 	       model.addAttribute("hayCarreras", carreraService.size());
-	 	       model.addAttribute("carreras", carreraService.findAll());
+	 	       model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
 	 	       return("materia");
 		 }
 		boolean exito=false;
@@ -131,7 +131,7 @@ public class MateriaController {
 		}		
 		model.addAttribute("exito", exito);
 		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("materias", materiaService.findAll());
+		model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
 		model.addAttribute("titulo", "Materias");
 		return("materias");
 	}

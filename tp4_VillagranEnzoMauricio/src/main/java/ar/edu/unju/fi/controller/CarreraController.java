@@ -30,7 +30,7 @@ public class CarreraController {
 		String mensaje="";
 		model.addAttribute("exito", exito);
 		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("carreras", carreraService.findAll()); //enviamos el array list
+		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue()); //enviamos el array list
 		model.addAttribute("titulo", "Carreras");
 		return("carreras");
 	}
@@ -65,7 +65,7 @@ public class CarreraController {
 		}
 		modelAndView.addObject("exito", exito);
 		modelAndView.addObject("mensaje", mensaje);
-		modelAndView.addObject("carreras", carreraService.findAll()); //la variable ${carreras}  de la tabla en la pagina carreras.html
+		modelAndView.addObject("carreras", carreraService.findCarrerasByEstadoTrue()); //la variable ${carreras}  de la tabla en la pagina carreras.html
 		return modelAndView;
 	}
 	
@@ -99,7 +99,7 @@ public class CarreraController {
 		}
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("exito", exito);
-		model.addAttribute("carreras", carreraService.findAll()); //enviamos el array list
+		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue()); //enviamos el array list
 		model.addAttribute("titulo", "Carreras");
 		return("carreras");
 	}

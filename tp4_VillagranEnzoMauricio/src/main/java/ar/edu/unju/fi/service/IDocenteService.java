@@ -6,7 +6,8 @@ import ar.edu.unju.fi.dto.DocenteDTO;
 
 public interface IDocenteService {
 	
-List<DocenteDTO> findALL();
+	
+	List<DocenteDTO> findDocentesByEstadoTrue();
 	
 	DocenteDTO findByLegajo(int legajo);
 	

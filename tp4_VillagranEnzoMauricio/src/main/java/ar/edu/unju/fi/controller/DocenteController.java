@@ -29,7 +29,7 @@ public class DocenteController {
     public String getDocentesPage(Model model) {
         model.addAttribute("exito", false);
         model.addAttribute("mensaje", "");
-        model.addAttribute("docentes", docenteService.findALL());
+        model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
         model.addAttribute("titulo", "Docentes");
         return "docentes";
     }
@@ -88,7 +88,7 @@ public class DocenteController {
             model.addAttribute("mensaje", "Error al modificar el docente: " + e.getMessage());
         }
 
-        model.addAttribute("docentes", docenteService.findALL());
+        model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
         model.addAttribute("titulo", "Docentes");
         return "docentes";
     }

@@ -22,15 +22,15 @@ public class DocenteServiceImpl implements IDocenteService {
 	@Autowired
 	private DocenteRepository docenteRepository;
 	
-	@Override
-	public List<DocenteDTO> findALL() {
-		LOGGER.info("SERVICE: IDocenteService -> DocenteServiceImpl");
-		LOGGER.info("METHOD: findALL()");
-		LOGGER.info("RESULT: una lista de docentes DTO");
-		List<DocenteDTO> docenteDTOs =  docenteMapper.toDocenteDTOList(docenteRepository.findAll());
-		return docenteDTOs;
-	}
 
+	@Override
+	public List<DocenteDTO> findDocentesByEstadoTrue() {
+		LOGGER.info("SERVICE: IDocenteService -> DocenteServiceImpl");
+		LOGGER.info("METHOD: findDocentesByEstadoTrue()");
+		LOGGER.info("RESULT: una lista de docentes DTO con estado TRUE");
+		List<Docente> docentesActivos = docenteRepository.findByEstadoTrue();
+		return docenteMapper.toDocenteDTOList(docentesActivos);
+	}
 	@Override
 	public DocenteDTO findByLegajo(int legajo) {
 		//DocenteDTO docenteDTO = docenteMapper.toDocenteDTO(CollectionDocente.buscarDocente(legajo));
@@ -80,6 +80,10 @@ public class DocenteServiceImpl implements IDocenteService {
 		LOGGER.info("RESULT: cuenta las entidades del repositorio");
 		return (int) docenteRepository.count();
 	}
+
+	
+
+	
 
 	
 }

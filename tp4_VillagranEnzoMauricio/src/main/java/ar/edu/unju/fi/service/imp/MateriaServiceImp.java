@@ -22,14 +22,13 @@ public class MateriaServiceImp implements IMateriaService {
 	
 	
 	@Override
-	public List<MateriaDTO> findAll() {
+	public List<MateriaDTO> findMateriasByEstadoTrue() {
 		LOGGER.info("SERVICE: IMateriaService -> MateriaServiceImp");
-		LOGGER.info("METHOD: findALL()");
-		LOGGER.info("RESULT: una lista de materias DTO");
-		List<MateriaDTO> materiaDTOs = materiaMapper.toMateriaDTOList(materiaRepository.findAll());
-		return materiaDTOs;
+		LOGGER.info("METHOD: findMateriasByEstadoTrue()");
+		LOGGER.info("RESULT: una lista de materias DTO con estado TRUE");
+		List<Materia> materiasActivas = materiaRepository.findByEstadoTrue();
+		return materiaMapper.toMateriaDTOList(materiasActivas);
 	}
-
 	@Override
 	public MateriaDTO findById(int codigo) {
 		LOGGER.info("SERVICE: IMateriaService -> MateriaServiceImp");
@@ -71,5 +70,7 @@ public class MateriaServiceImp implements IMateriaService {
 		materiaRepository.save(materia);
 
 	}
+
+	
 
 }

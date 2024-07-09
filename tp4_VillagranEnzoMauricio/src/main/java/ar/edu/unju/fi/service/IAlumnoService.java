@@ -6,7 +6,7 @@ import ar.edu.unju.fi.dto.AlumnoDTO;
 
 public interface IAlumnoService {
 	
-	List<AlumnoDTO> findALL();
+	List<AlumnoDTO> findAlumnosByEstadoTrue();
 	
 	AlumnoDTO findByLu(int lu);
 	
