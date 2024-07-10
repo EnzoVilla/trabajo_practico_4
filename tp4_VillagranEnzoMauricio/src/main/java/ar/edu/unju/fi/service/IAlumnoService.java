@@ -16,6 +16,7 @@ public interface IAlumnoService {
 	
 	void edit(AlumnoDTO alumnoDTO) throws Exception; 
 	
+	int size();
 	
-
+	void inscribirEnMateria(int lu, int codigo)throws Exception;
 }

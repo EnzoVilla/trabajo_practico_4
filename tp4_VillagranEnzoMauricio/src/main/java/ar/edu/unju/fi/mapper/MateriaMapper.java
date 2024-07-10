@@ -22,8 +22,8 @@ public interface MateriaMapper {
 		@Mapping(source="docente",target="docente"),
 		@Mapping(source="modalidad",target="modalidad"),
 		@Mapping(source="nombre",target="nombre"),
-		@Mapping(source="alumnos",target="alumnos"),
-		@Mapping(source="estado",target="estado")
+		@Mapping(source="estado",target="estado"),
+		@Mapping(source="alumnos", target="alumnos", ignore=true)
 	})
 	MateriaDTO toMateriaDTO(Materia materia);
 	@InheritInverseConfiguration

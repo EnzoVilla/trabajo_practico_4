@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.IAlumnoService;
+import ar.edu.unju.fi.service.IMateriaService;
 import jakarta.validation.Valid;
 
 @Controller
@@ -23,6 +25,8 @@ public class AlumnoController {
     
     @Autowired
     private IAlumnoService alumnoService;
+    @Autowired
+    private IMateriaService materiaService;
     
     @GetMapping("/listado")
     public String getAlumnosPage(Model model) {
@@ -110,4 +114,33 @@ public class AlumnoController {
         alumnoService.delateByLu(lu);
         return "redirect:/alumno/listado";
     }
+    @GetMapping("/inscribir")
+    public String getInscripcionPage(Model model){
+    	model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
+    	model.addAttribute("alumnos", alumnoService.findAlumnosByEstadoTrue());
+		model.addAttribute("hayMaterias", materiaService.size()); 
+		model.addAttribute("hayAlumnos", alumnoService.size());
+    	return("inscripcionMateria");
+    }
+    @PostMapping("/inscripcion")
+    public String inscribirAlumno(@RequestParam("lu") int lu, @RequestParam("codigo") int codigo, Model model) {
+    	 boolean exito = false;
+         String mensaje = "";
+         try {
+             alumnoService.inscribirEnMateria(lu, codigo);
+             mensaje = "La inscripcion se realizó con exito";
+             exito = true;
+         } catch (Exception e) {
+             mensaje = e.getMessage();
+             e.printStackTrace();
+         }
+         model.addAttribute("mensaje", mensaje);
+         model.addAttribute("exito", exito);
+         model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
+     	 model.addAttribute("alumnos", alumnoService.findAlumnosByEstadoTrue());
+ 		 model.addAttribute("hayMaterias", materiaService.size()); 
+ 		 model.addAttribute("hayAlumnos", alumnoService.size());
+    	return("inscripcionMateria");
+    }
+    
 }

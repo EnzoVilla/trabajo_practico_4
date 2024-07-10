@@ -70,6 +70,13 @@ public class MateriaServiceImp implements IMateriaService {
 		materiaRepository.save(materia);
 
 	}
+	@Override
+	public int size() {
+		LOGGER.info("SERVICE: IMateriaService -> MateriaServiceImp");
+		LOGGER.info("METHOD:  size()");
+		LOGGER.info("RESULT: cuenta las entidades del repositorio");
+		return (int) materiaRepository.count();
+	}
 
 	
 
