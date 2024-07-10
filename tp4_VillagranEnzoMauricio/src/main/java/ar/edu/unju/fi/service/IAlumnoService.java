@@ -19,4 +19,8 @@ public interface IAlumnoService {
 	int size();
 	
 	void inscribirEnMateria(int lu, int codigo)throws Exception;
+
+	List<AlumnoDTO> findByMateriaId(int codigo);
+	
+	List<AlumnoDTO> findByCarreraId(int codigo);
 }

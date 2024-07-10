@@ -1,6 +1,8 @@
 package ar.edu.unju.fi.controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,12 +12,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.CarreraDTO;
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.dto.MateriaDTO;
-
+import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IDocenteService;
 import ar.edu.unju.fi.service.IMateriaService;
@@ -30,13 +34,15 @@ public class MateriaController {
 	private DocenteDTO docenteDTO;
 	@Autowired
 	private CarreraDTO carreraDTO;
-	
+
 	@Autowired
 	private IMateriaService materiaService;
 	@Autowired
 	private ICarreraService carreraService;
 	@Autowired
 	private IDocenteService docenteService;
+	@Autowired
+	private IAlumnoService alumnoService;
 	
 	@GetMapping("/listado")
 	public String getListadoMateria(Model model) {
@@ -139,5 +145,19 @@ public class MateriaController {
 	public String eliminarMateria(@PathVariable(value="codigo") int codigo) {
 		materiaService.deleteByCod(codigo);
 		return("redirect:/materia/listado");
+	}
+	@GetMapping("/alumnos")
+	public String consultaAlumnos(Model model) {
+		model.addAttribute("hayMaterias", materiaService.size());
+		model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
+		return("materiasAlumno");
+	}
+	@PostMapping("/alumnos")
+	public String alumnosFiltrados( @RequestParam("codigo") int codigo, Model model) {
+		List<AlumnoDTO> alumnosMaterias = alumnoService.findByMateriaId(codigo);
+		model.addAttribute("alumnos", alumnosMaterias);
+		model.addAttribute("hayMaterias", materiaService.size());
+		model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
+		return("materiasAlumno");
 	}
 }
