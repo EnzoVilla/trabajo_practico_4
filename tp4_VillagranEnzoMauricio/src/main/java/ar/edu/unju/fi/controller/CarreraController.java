@@ -1,5 +1,7 @@
 package ar.edu.unju.fi.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,10 +11,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.dto.CarreraDTO;
-
+import ar.edu.unju.fi.service.IAlumnoService;
 import ar.edu.unju.fi.service.ICarreraService;
 import jakarta.validation.Valid;
 
@@ -23,6 +27,8 @@ public class CarreraController {
 	private CarreraDTO carreraDTO;
 	@Autowired
 	private ICarreraService carreraService;
+	@Autowired
+	private IAlumnoService alumnoService;
 	
 	@GetMapping("/listado")
 	public String getCarrerasPage(Model model) {
@@ -107,5 +113,19 @@ public class CarreraController {
 	public String eliminarCarrera(@PathVariable(value="codigo") int codigo) {
 		carreraService.deleteByCod_carrera(codigo);
 		return("redirect:/carrera/listado");
+	}
+	@GetMapping("/alumnosFiltrados")
+	public String consultaAlumnos(Model model) {
+		model.addAttribute("hayCarreras", carreraService.size());
+		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
+		return("carrerasAlumno");
+	}
+	@PostMapping("/alumnosFiltrados")
+	public String alumnosFiltrados( @RequestParam("codigo") int codigo, Model model) {
+		List<AlumnoDTO> alumnosMaterias = alumnoService.findByCarreraId(codigo);
+		model.addAttribute("alumnos", alumnosMaterias);
+		model.addAttribute("hayCarreras", carreraService.size());
+		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
+		return("carrerasAlumno");
 	}
 }

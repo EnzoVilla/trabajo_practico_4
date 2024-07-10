@@ -1,6 +1,9 @@
 package ar.edu.unju.fi.service.imp;
 
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,8 +12,10 @@ import org.apache.commons.logging.Log;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Carrera;
 import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.CarreraRepository;
 import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
 
@@ -25,7 +30,8 @@ public class AlumnoServiceImp implements IAlumnoService {
 	private final AlumnoRepository alumnoRepository;
 	@Autowired
 	private final MateriaRepository materiaRepository;
-	
+	@Autowired
+	private CarreraRepository carreraRepository;
 
   
 	public AlumnoServiceImp (AlumnoMapper alumnoMapper, AlumnoRepository alumnoRepository, MateriaRepository materiaRepository) {
@@ -103,6 +109,23 @@ public class AlumnoServiceImp implements IAlumnoService {
 		materiaRepository.save(materia);
 	}
 
-	
+	@Override
+	public List<AlumnoDTO> findByMateriaId(int codigo) {
+		Optional<Materia> materias = materiaRepository.findById(codigo);
+		List<Alumno> alumnos = new ArrayList<>();
+		if(materias.isPresent()) {
+			alumnos = materias.get().getAlumnos();
+		}
+		return alumnoMapper.toAlumnoDTOList(alumnos);
+	}
 
+	@Override
+	public List<AlumnoDTO> findByCarreraId(int codigo) {
+		Optional<Carrera> carreras = carreraRepository.findById(codigo);
+		List<Alumno> alumnos = new ArrayList<>();
+		if(carreras.isPresent()) {
+			alumnos = carreras.get().getAlumnos();
+		}
+		return alumnoMapper.toAlumnoDTOList(alumnos);
+	}
 }
