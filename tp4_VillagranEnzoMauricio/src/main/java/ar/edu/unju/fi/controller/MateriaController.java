@@ -55,7 +55,7 @@ public class MateriaController {
 		model.addAttribute("edicion", edicion);
 		model.addAttribute("materia", materiaDTO);
 		model.addAttribute("hayDocentes", docenteService.size());
-		model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
+		model.addAttribute("docentes", docenteService.docentesSinMaterias());
 		model.addAttribute("hayCarreras", carreraService.size());
 		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
 		return("materia");
@@ -68,7 +68,7 @@ public class MateriaController {
 			modelAndView.addObject("edicion", false);
 			modelAndView.addObject("titulo", "Nueva Materia");
 			modelAndView.addObject("hayDocentes", docenteService.size());
-			modelAndView.addObject("docentes", docenteService.findDocentesByEstadoTrue());
+			modelAndView.addObject("docentes", docenteService.docentesSinMaterias());
 			modelAndView.addObject("hayCarreras", carreraService.size());
 			modelAndView.addObject("carreras", carreraService.findCarrerasByEstadoTrue());
 			return modelAndView;
@@ -100,7 +100,7 @@ public class MateriaController {
 		model.addAttribute("materia", materiaEncontrada);
 		model.addAttribute("titulo", "Modificar materia");
 		model.addAttribute("carreras",carreraService.findCarrerasByEstadoTrue());
-		model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
+		model.addAttribute("docentes", docenteService.docentesSinMaterias());
 		return("materia");
 	}
 	@PostMapping("/modificar")
@@ -109,7 +109,7 @@ public class MateriaController {
 	 	       model.addAttribute("edicion", true);
 	 	       model.addAttribute("titulo", "Modificar materia");
 	 	       model.addAttribute("hayDocentes", docenteService.size());
-	 	       model.addAttribute("docentes", docenteService.findDocentesByEstadoTrue());
+	 	       model.addAttribute("docentes", docenteService.docentesSinMaterias());
 	 	       model.addAttribute("hayCarreras", carreraService.size());
 	 	       model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
 	 	       return("materia");

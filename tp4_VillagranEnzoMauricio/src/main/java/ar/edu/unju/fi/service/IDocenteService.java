@@ -9,6 +9,8 @@ public interface IDocenteService {
 	
 	List<DocenteDTO> findDocentesByEstadoTrue();
 	
+	List<DocenteDTO> docentesSinMaterias();
+	
 	DocenteDTO findByLegajo(int legajo);
 	
 	DocenteDTO save(DocenteDTO docenteDTO);

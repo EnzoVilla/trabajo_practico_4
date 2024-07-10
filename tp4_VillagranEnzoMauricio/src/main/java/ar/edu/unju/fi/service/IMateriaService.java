@@ -11,4 +11,5 @@ public interface IMateriaService {
 	void deleteByCod(int codigo);
 	void edit(MateriaDTO materiaDTO) throws Exception;
 	List<MateriaDTO> findMateriasByEstadoTrue();
+	
 }

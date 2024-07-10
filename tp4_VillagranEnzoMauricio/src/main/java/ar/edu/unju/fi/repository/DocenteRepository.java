@@ -10,4 +10,5 @@ import ar.edu.unju.fi.model.Docente;
 @Repository
 public interface DocenteRepository extends JpaRepository<Docente,Integer>{
 	List<Docente> findByEstadoTrue();
+	
 }
