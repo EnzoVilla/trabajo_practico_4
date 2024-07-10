@@ -6,19 +6,13 @@
 
 	<header th:replace="~{layouts/header :: header}"> </header>
 	<nav th:replace="~{layouts/header :: navbar}"></nav>
-	>
 	<div class="container mt-5 py-5" style="background-color: #e3f2fd;">
 		<div class="mb-3 d-flex justify-content-center">
 			<h2 data-th-text="${edicion}?'Modificar Alumno':'Nuevo Alumno'"></h2>
 		</div>
 		<div>
-			<form
-				data-th-action="${edicion}?@{/alumno/modificar}:@{/alumno/guardar}"
-				th:object="${alumno}" method="post">
+			<form data-th-action="${edicion}?@{/alumno/modificar}:@{/alumno/guardar}" th:object="${alumno}" method="post">
 				<div class="d-flex justify-content-center mb-3">
-					<!-- <label for="lu" class="me-2">LU</label>
-					<input id="lu" type="number" name="lu" th:field="*{lu}" th:disabled="${edicion}?true:false" required>
-					<input id="lu" type="hidden" name="lu" th:field="*{lu}" th:if="${edicion}"> -->
 					<input type="hidden" name="lu" th:value="${alumno.lu}">
 				</div>
 				<div class="d-flex justify-content-center mb-3">
@@ -26,6 +20,13 @@
 						type="text" name="dni" th:field="*{dni}" placeholder="Ingrese dni" th:classappend="${#fields.hasErrors('dni')} ? 'is-invalid' : ''">
 					<p class="form-text text-danger"
 						th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}"></p>
+				</div>
+				<div class="d-flex justify-content-center mb-3">
+					<label for="carrera" class="me-2">Carrera</label>
+					<select th:field="*{carreraDTO.codigo}" id="carrera" name="carrera" required>
+						<option value=0 disabled selected data-th-text="${hayCarreras}==0?'No hay carreras registradas':'Seleccione una carrera'"></option>
+						<option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>
+					</select>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="nombre" class="me-2">Nombre</label> <input id="nombre"
