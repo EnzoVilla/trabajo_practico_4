@@ -10,7 +10,7 @@ import org.mapstruct.MappingConstants;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.model.Alumno;
 
-@Mapper(componentModel = MappingConstants.ComponentModel.SPRING)
+@Mapper(componentModel = MappingConstants.ComponentModel.SPRING,uses = { MateriaMapper.class, CarreraMapper.class })
 public interface AlumnoMapper {
 	@Mapping(source="dni",target="dni")
 	@Mapping(source="nombre",target="nombre")
@@ -21,6 +21,8 @@ public interface AlumnoMapper {
 	@Mapping(source="fechaNacimiento", target="fechaNacimiento")
 	@Mapping(source="domicilio",target="domicilio")
 	@Mapping(source="estado",target="estado")
+	@Mapping(source="materias", target="materias")
+	@Mapping(source="carrera", target="carreraDTO")
 	AlumnoDTO toAlumnoDTO(Alumno alumno);
 	
 	@InheritInverseConfiguration

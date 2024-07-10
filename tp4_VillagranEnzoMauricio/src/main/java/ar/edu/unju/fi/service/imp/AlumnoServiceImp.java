@@ -9,7 +9,9 @@ import org.apache.commons.logging.Log;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.mapper.AlumnoMapper;
 import ar.edu.unju.fi.model.Alumno;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.AlumnoRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IAlumnoService;
 
 
@@ -18,10 +20,19 @@ public class AlumnoServiceImp implements IAlumnoService {
 	private static final Log LOGGER = LogFactory.getLog(AlumnoServiceImp.class);
 	
 	@Autowired
-	private AlumnoMapper alumnoMapper;
+	private final AlumnoMapper alumnoMapper;
 	@Autowired
-	private AlumnoRepository alumnoRepository;
+	private final AlumnoRepository alumnoRepository;
+	@Autowired
+	private final MateriaRepository materiaRepository;
 	
+
+  
+	public AlumnoServiceImp (AlumnoMapper alumnoMapper, AlumnoRepository alumnoRepository, MateriaRepository materiaRepository) {
+		this.alumnoMapper = alumnoMapper;
+		this.alumnoRepository = alumnoRepository;
+		this.materiaRepository = materiaRepository;
+	}
 	
 	@Override
 	public List<AlumnoDTO> findAlumnosByEstadoTrue() {
@@ -71,6 +82,25 @@ public class AlumnoServiceImp implements IAlumnoService {
 			throw new Exception("No se encuentra el alumno solicitado");
 		}
 		alumnoRepository.save(alumno);
+	}
+
+	@Override
+	public int size() {
+		LOGGER.info("SERVICE: IAlumnoService -> AlumnoServiceImp");
+		LOGGER.info("METHOD:  size()");
+		LOGGER.info("RESULT: cuenta las entidades del repositorio");
+		return (int) alumnoRepository.count();
+	}
+
+	@Override
+	public void inscribirEnMateria(int lu, int codigo) throws Exception{
+		Alumno alumno = alumnoRepository.findById(lu).orElse(null);
+		Materia materia = materiaRepository.findById(codigo).orElse(null);
+		if(materia.getAlumnos().contains(alumno)) {
+			throw new Exception("El alumno ya se encuentra inscripto en la materia");
+		}
+		materia.getAlumnos().add(alumno);
+		materiaRepository.save(materia);
 	}
 
 	

@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -47,9 +46,9 @@ public class Carrera {
 	
 	
 	
-	@OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "carrera")
 	private List<Materia> materias = new ArrayList<>();
 	
-	@OneToMany(mappedBy = "carrera", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "carrera")
 	private List<Alumno> alumnos = new ArrayList<>();
 }
