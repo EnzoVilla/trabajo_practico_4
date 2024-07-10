@@ -1,5 +1,6 @@
 package ar.edu.unju.fi.service.imp;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 import ar.edu.unju.fi.dto.DocenteDTO;
 import ar.edu.unju.fi.mapper.DocenteMapper;
 import ar.edu.unju.fi.model.Docente;
+import ar.edu.unju.fi.model.Materia;
 import ar.edu.unju.fi.repository.DocenteRepository;
+import ar.edu.unju.fi.repository.MateriaRepository;
 import ar.edu.unju.fi.service.IDocenteService;
 
 @Service
@@ -21,7 +24,8 @@ public class DocenteServiceImpl implements IDocenteService {
 	
 	@Autowired
 	private DocenteRepository docenteRepository;
-	
+	@Autowired
+	private MateriaRepository materiaRepository; 
 
 	@Override
 	public List<DocenteDTO> findDocentesByEstadoTrue() {
@@ -79,6 +83,25 @@ public class DocenteServiceImpl implements IDocenteService {
 		LOGGER.info("METHOD:  size()");
 		LOGGER.info("RESULT: cuenta las entidades del repositorio");
 		return (int) docenteRepository.count();
+	}
+	@Override
+	public List<DocenteDTO> docentesSinMaterias() {
+		LOGGER.info("SERVICE: IDocenteService -> DocenteServiceImpl");
+		LOGGER.info("METHOD:  docentesSinMaterias()");
+		LOGGER.info("RESULT: lista de docentes DTO que no tienen una materia asignada y su estado activo");
+		List<Materia> materiasActivas = materiaRepository.findByEstadoTrue();
+		List<Docente> docentesActivos = docenteRepository.findByEstadoTrue();
+		List<Integer> legajosDeDocentesMaterias = new ArrayList<>();
+		List<Docente> docenteSinMateria = new ArrayList<>();
+		for(Materia materia : materiasActivas) {
+			legajosDeDocentesMaterias.add(materia.getDocente().getLegajo());
+		}
+		for(Docente docente : docentesActivos) {
+			if(!legajosDeDocentesMaterias.contains(docente.getLegajo())) {
+				docenteSinMateria.add(docente);
+			}
+		}
+		return docenteMapper.toDocenteDTOList(docenteSinMateria);
 	}
 
 	
