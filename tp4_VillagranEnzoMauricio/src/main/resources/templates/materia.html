@@ -54,8 +54,6 @@
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="carrera" class="me-2">Carrera</label>
-					<!-- <input id="carrera" type="text" name="carrera" th:field="*{carrera}"> -->	
-						
 					<select th:field="*{carrera.codigo}" id="carrera" name="carrera" required>
 						<option value=0 disabled selected data-th-text="${hayCarreras}==0?'No hay carreras registradas':'Seleccione una carrera'"></option>
 						<option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>

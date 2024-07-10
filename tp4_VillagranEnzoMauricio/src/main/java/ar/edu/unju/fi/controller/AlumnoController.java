@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import ar.edu.unju.fi.dto.AlumnoDTO;
 import ar.edu.unju.fi.service.IAlumnoService;
+import ar.edu.unju.fi.service.ICarreraService;
 import ar.edu.unju.fi.service.IMateriaService;
 import jakarta.validation.Valid;
 
@@ -27,7 +28,8 @@ public class AlumnoController {
     private IAlumnoService alumnoService;
     @Autowired
     private IMateriaService materiaService;
-    
+    @Autowired
+    private ICarreraService carreraService;
     @GetMapping("/listado")
     public String getAlumnosPage(Model model) {
         boolean exito=false;
@@ -45,6 +47,8 @@ public class AlumnoController {
         model.addAttribute("alumno", alumnoDTO);
         model.addAttribute("edicion", edicion);
         model.addAttribute("titulo", "Nuevo alumno");
+        model.addAttribute("hayCarreras", carreraService.size());
+		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
         return "alumno";
     }
     
@@ -55,6 +59,8 @@ public class AlumnoController {
             modelAndView.setViewName("alumno");
             modelAndView.addObject("edicion", false);
             modelAndView.addObject("titulo", "Nuevo Alumno");
+            modelAndView.addObject("hayCarreras", carreraService.size());
+			modelAndView.addObject("carreras", carreraService.findCarrerasByEstadoTrue());
             return modelAndView;
         }
         
@@ -80,6 +86,7 @@ public class AlumnoController {
         model.addAttribute("edicion", edicion);
         model.addAttribute("alumno", alumnoEncontradoDTO);
         model.addAttribute("titulo", "Modificar alumno");
+        model.addAttribute("carreras",carreraService.findCarrerasByEstadoTrue());
         return "alumno";
     }
     
@@ -88,6 +95,8 @@ public class AlumnoController {
     	 if (result.hasErrors()) {
     	        model.addAttribute("edicion", true);
     	        model.addAttribute("titulo", "Modificar Alumno");
+    	        model.addAttribute("hayCarreras", carreraService.size());
+ 	 	       	model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
     	        return "alumno";
     	    }
         
