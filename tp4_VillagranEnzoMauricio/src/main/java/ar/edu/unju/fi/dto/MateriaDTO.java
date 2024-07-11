@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -27,7 +28,9 @@ public class MateriaDTO {
 	private String cantHoras;
 	@NotBlank(message="Debe seleccionar una modalidad")
 	private String modalidad;
+	@NotNull(message = "Debe seleccionar un docente")
 	private DocenteDTO docente;
+	@NotNull(message = "Debe seleccionar una carrera")
 	private CarreraDTO carrera;
 	private boolean estado;
 	private List<AlumnoDTO> alumnos = new ArrayList<AlumnoDTO>();

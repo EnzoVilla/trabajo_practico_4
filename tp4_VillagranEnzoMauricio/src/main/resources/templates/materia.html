@@ -14,27 +14,24 @@
 		<div class="row">
 			<form data-th-action="${edicion}?@{/materia/modificar}:@{/materia/guardar}" th:object="${materia}" method="post">
 				<div class="d-flex justify-content-center mb-3">
-					<!-- <label for="codigoMateria" class="me-2">Codigo</label>
-					<input id="codigoMateria" type="number" name="codigoMateria" th:field="*{codigo}" th:disabled="${edicion}?true:false" required>
-					<input id="codigoMateria" type="hidden" name="codigoMateria" th:field="*{codigo}" th:if="${edicion}"> -->	
 					<input type="hidden" name="codigoMateria" th:field="*{codigo}">	
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="nombreMateria" class="me-2">Nombre</label>
-					<input id="nombreMateria" type="text" name="nombre" th:field="*{nombre}"  placeholder="Ingrese nombre de la materia" th:classappend="${#fields.hasErrors('nombre')} ? 'is-invalid' : ''" >
-					<p class="form-text text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></p>		
+					<input id="nombreMateria" type="text" name="nombre" th:field="*{nombre}"  placeholder="Ingrese nombre de la materia">
+					<div class="ms-2 text-danger" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}"></div>		
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="curso" class="me-2">Curso</label>
-					<input id="curso" type="text" name="curso" th:field="*{curso}"  placeholder="Ingrese el año correspondiente de la materia" th:classappend="${#fields.hasErrors('curso')} ? 'is-invalid' : ''" >
-					<p class="form-text text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></p>		
+					<input id="curso" type="text" name="curso" th:field="*{curso}"  placeholder="Ingrese el año correspondiente de la materia">
+					<p class="ms-2 text-danger" th:if="${#fields.hasErrors('curso')}" th:errors="*{curso}"></p>		
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="cantHoras" class="me-2">Horas catedra</label>
-					<input id="cantHoras" type="text" name="cantHoras" th:field="*{cantHoras}" placeholder="Ingrese nombre/s" th:classappend="${#fields.hasErrors('cantHoras')} ? 'is-invalid' : ''" >
-					<p class="form-text text-danger" th:if="${#fields.hasErrors('cantHoras')}" th:errors="*{cantHoras}"></p>	
+					<input id="cantHoras" type="text" name="cantHoras" th:field="*{cantHoras}" placeholder="Ingrese nombre/s">
+					<div class="ms-2 text-danger" th:if="${#fields.hasErrors('cantHoras')}" th:errors="*{cantHoras}"></div>	
 				</div>
-				<div class="d-flex justify-content-center mb-3">
+				<div class="d-flex justify-content-center mb-3 ">
 					<label for="modalidad" class="me-2">Modalidad:</label>
 					<div>
 						<label for="modalidad">Presencial</label>
@@ -43,22 +40,23 @@
 						<input id="modalidad" type="radio" name="modalidad" value="Virtual" th:field="*{modalidad}">
 						<p class="form-text text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></p>
 					</div>
+					<div class="ms-2 text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></div>	
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="docente" class="me-2">Docente</label>
-					<!-- <input id="docente" type="text" name="docente" th:field="*{docente}">	 -->
-					<select th:field="*{docente.legajo}" id="docente" name="docente" required>
+					<select th:field="*{docente.legajo}" id="docente" name="docente">
 						<option value=0 disabled selected data-th-text="${hayDocentes}==0?'No hay docentes registrados':'Seleccione un Docente'"></option>
 						<option th:each="docente : ${docentes}" th:value="${docente.legajo}" th:text="${docente.nombre}+' '+${docente.apellido}"></option>
 					</select>
-						
+					<div class="ms-2 text-danger" th:if="${#fields.hasErrors('docente.legajo')}" th:errors="*{docente.legajo}"></div>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<label for="carrera" class="me-2">Carrera</label>
-					<select th:field="*{carrera.codigo}" id="carrera" name="carrera" required>
+					<select th:field="*{carrera.codigo}" id="carrera" name="carrera">
 						<option value=0 disabled selected data-th-text="${hayCarreras}==0?'No hay carreras registradas':'Seleccione una carrera'"></option>
 						<option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>
 					</select>
+					<div class="ms-2 text-danger" th:if="${#fields.hasErrors('carrera.codigo')}" th:errors="*{carrera.codigo}"></div>
 				</div>
 				<div class="d-flex justify-content-center mb-3"> 
 					<p><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"> </p>
