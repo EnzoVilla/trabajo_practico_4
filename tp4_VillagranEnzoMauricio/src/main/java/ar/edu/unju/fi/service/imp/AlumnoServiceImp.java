@@ -100,6 +100,9 @@ public class AlumnoServiceImp implements IAlumnoService {
 
 	@Override
 	public void inscribirEnMateria(int lu, int codigo) throws Exception{
+		LOGGER.info("SERVICE: IAlumnoService -> AlumnoServiceImp");
+		LOGGER.info("METHOD:  inscribirEnMateria(int lu, int codigo)");
+		LOGGER.info("RESULT: inscribe en una materia a un alumno");
 		Alumno alumno = alumnoRepository.findById(lu).orElse(null);
 		Materia materia = materiaRepository.findById(codigo).orElse(null);
 		if(materia.getAlumnos().contains(alumno)) {
@@ -111,6 +114,9 @@ public class AlumnoServiceImp implements IAlumnoService {
 
 	@Override
 	public List<AlumnoDTO> findByMateriaId(int codigo) {
+		LOGGER.info("SERVICE: IAlumnoService -> AlumnoServiceImp");
+		LOGGER.info("METHOD:  findByMateriaId(int codigo)");
+		LOGGER.info("RESULT: devuelve una lista de alumnos segun un codigo de materia");
 		Optional<Materia> materias = materiaRepository.findById(codigo);
 		List<Alumno> alumnos = new ArrayList<>();
 		if(materias.isPresent()) {
@@ -121,6 +127,9 @@ public class AlumnoServiceImp implements IAlumnoService {
 
 	@Override
 	public List<AlumnoDTO> findByCarreraId(int codigo) {
+		LOGGER.info("SERVICE: IAlumnoService -> AlumnoServiceImp");
+		LOGGER.info("METHOD:  findByCarreraId(int codigo)");
+		LOGGER.info("RESULT: devuelve una lista de alumnos segun un codigo de carrera");
 		Optional<Carrera> carreras = carreraRepository.findById(codigo);
 		List<Alumno> alumnos = new ArrayList<>();
 		if(carreras.isPresent()) {

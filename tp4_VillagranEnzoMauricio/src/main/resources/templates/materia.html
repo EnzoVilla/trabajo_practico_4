@@ -38,7 +38,6 @@
 						<input id="modalidad" type="radio" name="modalidad" value="Presencial" th:field="*{modalidad}">
 						<label for="modalidad">Virtual</label>
 						<input id="modalidad" type="radio" name="modalidad" value="Virtual" th:field="*{modalidad}">
-						<p class="form-text text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></p>
 					</div>
 					<div class="ms-2 text-danger" th:if="${#fields.hasErrors('modalidad')}" th:errors="*{modalidad}"></div>	
 				</div>
