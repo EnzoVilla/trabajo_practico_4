@@ -17,7 +17,9 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
@@ -53,7 +55,8 @@ public class Alumno {
 	@Email(message="El correo electronico ingresado es invalido")
 	@Column(name="email_alumno", nullable = false)
 	private String email;
-	
+	@NotNull(message="Debe ingresar el telefono")
+	@Min(value=1,message= "Debe ingresar un número mayor o igual a 1 ")
 	@Column(name="telefono_alumno", nullable = false)
 	private long telefono;
 	

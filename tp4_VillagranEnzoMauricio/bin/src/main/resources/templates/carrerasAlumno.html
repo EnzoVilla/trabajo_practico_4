@@ -7,19 +7,11 @@
 	</header>
 	<nav th:replace="~{layouts/header :: navbar}"></nav>
 	<div class="container mt-5 py-5" style="background-color:  #e3f2fd;">
-		<div th:if="${exito}"class="alert alert-success alert-dismissible fade show" role="alert">
-		  <strong data-th-text="${mensaje}"></strong>
-		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-		<div th:if="${!exito && mensaje!=''}"class="alert alert-warning alert-dismissible fade show" role="alert">
-		  <strong data-th-text="${mensaje}"></strong>
-		  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-		</div>
-		<h3>Filtrar alumnos segun carrera</h3>
 		<form th:action="@{/carrera/alumnosFiltrados}" method="post">
 	                <div class="form-group mt-3">
 	                    <label for="carrera">Carrera</label>
-	                    <select class="form-control" id="carrera" name="codigo" >
+	                    <select class="form-control" id="carrera" name="codigo">
+	                    	<option value=0 disabled selected data-th-text="${hayCarreras}==0?'No hay carreras registradas':'Seleccione una carrera'"></option>
 	                        <option th:each="carrera : ${carreras}" th:value="${carrera.codigo}" th:text="${carrera.nombre}"></option>
 	                    </select>
 	                </div>

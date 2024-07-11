@@ -125,10 +125,12 @@ public class AlumnoController {
     }
     @GetMapping("/inscribir")
     public String getInscripcionPage(Model model){
+    	boolean exito = false;
+        String mensaje = "";
+    	model.addAttribute("mensaje", mensaje);
+        model.addAttribute("exito", exito);
     	model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
     	model.addAttribute("alumnos", alumnoService.findAlumnosByEstadoTrue());
-		model.addAttribute("hayMaterias", materiaService.size()); 
-		model.addAttribute("hayAlumnos", alumnoService.size());
     	return("inscripcionMateria");
     }
     @PostMapping("/inscripcion")
@@ -147,8 +149,6 @@ public class AlumnoController {
          model.addAttribute("exito", exito);
          model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
      	 model.addAttribute("alumnos", alumnoService.findAlumnosByEstadoTrue());
- 		 model.addAttribute("hayMaterias", materiaService.size()); 
- 		 model.addAttribute("hayAlumnos", alumnoService.size());
     	return("inscripcionMateria");
     }
     

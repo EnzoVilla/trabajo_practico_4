@@ -148,16 +148,20 @@ public class MateriaController {
 	}
 	@GetMapping("/alumnos")
 	public String consultaAlumnos(Model model) {
-		model.addAttribute("hayMaterias", materiaService.size());
 		model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
+		model.addAttribute("titulo", "Consulta");
+		model.addAttribute("exito", false);
+		model.addAttribute("mensaje", "");
 		return("materiasAlumno");
 	}
 	@PostMapping("/alumnos")
 	public String alumnosFiltrados( @RequestParam("codigo") int codigo, Model model) {
 		List<AlumnoDTO> alumnosMaterias = alumnoService.findByMateriaId(codigo);
 		model.addAttribute("alumnos", alumnosMaterias);
-		model.addAttribute("hayMaterias", materiaService.size());
 		model.addAttribute("materias", materiaService.findMateriasByEstadoTrue());
+		model.addAttribute("titulo", "Consulta");
+		model.addAttribute("exito", true);
+		model.addAttribute("mensaje", "Consulta realizada");
 		return("materiasAlumno");
 	}
 }

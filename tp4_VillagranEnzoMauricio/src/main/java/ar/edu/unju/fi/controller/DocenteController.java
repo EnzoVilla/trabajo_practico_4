@@ -44,19 +44,19 @@ public class DocenteController {
 
     @PostMapping("/guardar")
     public ModelAndView guardar(@Valid @ModelAttribute("docente") DocenteDTO docenteDTO, BindingResult result) {
-        if (result.hasErrors()) {
-            ModelAndView modelAndView = new ModelAndView("docente");
+    	ModelAndView modelAndView = new ModelAndView("docentes");
+    	if (result.hasErrors()) {
+    		modelAndView.setViewName("docente");
             modelAndView.addObject("edicion", false);
             modelAndView.addObject("docente", docenteDTO);
             modelAndView.addObject("titulo", "Nuevo Docente");
             return modelAndView;
         }
-
         docenteDTO.setEstado(true);
         docenteService.save(docenteDTO);
-        ModelAndView modelAndView = new ModelAndView("redirect:/docente/listado");
         modelAndView.addObject("exito", true);
         modelAndView.addObject("mensaje", "Se guardó docente con éxito");
+        modelAndView.addObject("docentes", docenteService.findDocentesByEstadoTrue());
         return modelAndView;
     }
 

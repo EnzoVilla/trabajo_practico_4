@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -43,6 +44,7 @@ public class Docente {
     
    
     @NotNull(message = "Debe seleccionar un numero de telefono")
+    @Min(value=1,message= "Debe ingresar un número mayor o igual a 1 ")
     @Column(name = "docente_telefono", nullable=false)
     private long telefono;  
    
