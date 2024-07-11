@@ -18,6 +18,7 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -47,17 +48,19 @@ public class Materia {
 	@Column(name="cantHoras_materia", nullable = false)
 	private String cantHoras;
 	
+	@NotBlank(message="Debe seleccionar una modalidad")
 	@Column(name="modalidad_materia", nullable = false)
 	private String modalidad;
 	
 	@Column(name="estado_materia", nullable = false)
 	private Boolean estado;
 	
-	
+		@NotNull(message = "Debe seleccionar un docente")
 	 	@OneToOne
 		@JoinColumn(name = "docente_legajo")
 		private Docente docente;
 
+		@NotNull(message = "Debe seleccionar una carrera")
 		@ManyToOne(fetch = FetchType.LAZY)
 		@JoinColumn(name = "carrera_id")
 		private Carrera carrera;
