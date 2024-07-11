@@ -46,7 +46,7 @@ public class Materia {
 	@NotBlank(message="Debe ingresar las horas catedra")
 	@Column(name="cantHoras_materia", nullable = false)
 	private String cantHoras;
-	
+	@NotBlank(message="Debe seleccionar una modalidad")
 	@Column(name="modalidad_materia", nullable = false)
 	private String modalidad;
 	

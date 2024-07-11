@@ -116,16 +116,18 @@ public class CarreraController {
 	}
 	@GetMapping("/alumnosFiltrados")
 	public String consultaAlumnos(Model model) {
-		model.addAttribute("hayCarreras", carreraService.size());
 		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
+		model.addAttribute("exito", false);
+		model.addAttribute("mensaje", "");
 		return("carrerasAlumno");
 	}
 	@PostMapping("/alumnosFiltrados")
 	public String alumnosFiltrados( @RequestParam("codigo") int codigo, Model model) {
 		List<AlumnoDTO> alumnosMaterias = alumnoService.findByCarreraId(codigo);
 		model.addAttribute("alumnos", alumnosMaterias);
-		model.addAttribute("hayCarreras", carreraService.size());
 		model.addAttribute("carreras", carreraService.findCarrerasByEstadoTrue());
+		model.addAttribute("exito", true);
+		model.addAttribute("mensaje", "Consulta realizada");
 		return("carrerasAlumno");
 	}
 }

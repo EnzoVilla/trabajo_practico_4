@@ -44,25 +44,23 @@
 						th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}"></p>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="email" class="me-2">Email</label> <input id="email"
-						type="email" name="email" th:field="*{email}" required>
+					<label for="email" class="me-2">Email</label>
+					<input id="email" type="email" name="email" th:field="*{email}">
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="telefono" class="me-2">Telefono</label> <input
-						id="telefono" type="number" name="telefono" th:field="*{telefono}"
-						required>
+					<label for="telefono" class="me-2">Telefono</label> 
+					<input id="telefono" type="number" name="telefono" th:field="*{telefono}">
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></p>
 				</div>
 				<div class="d-flex justify-content-center mb-3"> <label for="fechaNacimiento" class="me-2">Fecha de nacimiento</label>
-				<input id="fechaNacimiento" type="date" name="fechaNacimiento"
-					th:field="*{fechaNacimiento}"
-					placeholder="Ingrese fecha de Nacimiento"	th:classappend="${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid' : ''"
-					min="1900-01-01" max="2100-12-31"> <p class="form-text text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}"
-					th:errors="*{fechaNacimiento}"></p>
+				<input id="fechaNacimiento" type="date" name="fechaNacimiento" th:field="*{fechaNacimiento}" placeholder="Ingrese fecha de Nacimiento"	th:classappend="${#fields.hasErrors('fechaNacimiento')} ? 'is-invalid' : ''" min="1900-01-01" max="2100-12-31">
+				<p class="form-text text-danger" th:if="${#fields.hasErrors('fechaNacimiento')}" th:errors="*{fechaNacimiento}"></p>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
-					<label for="domicilio" class="me-2">Domicilio</label> <input
-						id="domicilio" type="text" name="domicilio"
-						th:field="*{domicilio}" required>
+					<label for="domicilio" class="me-2">Domicilio</label> 
+					<input id="domicilio" type="text" name="domicilio" th:field="*{domicilio}" placeholder="Ingrese fecha de Nacimiento">
+					<p class="form-text text-danger" th:if="${#fields.hasErrors('domicilio')}" th:errors="*{domicilio}"></p>
 				</div>
 				<div class="d-flex justify-content-center mb-3">
 					<p><input type="submit" class="btn btn-primary" th:value="${edicion}?'Modificar':'Guardar'"></p>

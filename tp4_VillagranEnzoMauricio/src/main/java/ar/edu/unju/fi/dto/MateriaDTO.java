@@ -25,6 +25,7 @@ public class MateriaDTO {
 	@Pattern(regexp= "[0-9]*", message="Debe ingresar valores numericos")
 	@NotBlank(message="Debe ingresar las horas catedra")
 	private String cantHoras;
+	@NotBlank(message="Debe seleccionar una modalidad")
 	private String modalidad;
 	private DocenteDTO docente;
 	private CarreraDTO carrera;
